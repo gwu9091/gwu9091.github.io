@@ -32,8 +32,9 @@ nav {
   max-width: 800px;
   margin: 0 auto;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   gap: 20px;
+  padding-right: 20px;
 }
 
 .nav-link {
