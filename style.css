@@ -18,6 +18,27 @@ header {
   padding: 2rem;
 }
 
+nav {
+  background-color: #fff;
+  padding: 15px 0;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-bottom: 30px;
+}
+
+nav a {
+  color: #333;
+  text-decoration: none;
+  padding: 8px 15px;
+  margin: 0 5px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+nav a:hover {
+  background-color: #4a90e2;
+  color: white;
+}
+
 main {
   max-width: 800px;
   margin: 0 auto;
