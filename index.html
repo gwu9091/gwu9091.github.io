@@ -90,6 +90,27 @@
       ⭐⭐⭐⭐⭐ (212 評價)<br>
       專長：洗澡美容、寵物接送
     </div>
+    <button onclick="showReviewForm(this)" class="review-btn" data-provider="小雪美容師">評價</button>
+  </div>
+</div>
+
+<!-- 評價表單 -->
+<div id="review-form" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:white;padding:20px;border-radius:10px;box-shadow:0 0 10px rgba(0,0,0,0.5);z-index:1000;">
+  <h3>新增評價</h3>
+  <p id="review-provider"></p>
+  <div style="margin:10px 0;">
+    評分：<select id="rating">
+      <option value="5">⭐⭐⭐⭐⭐</option>
+      <option value="4">⭐⭐⭐⭐</option>
+      <option value="3">⭐⭐⭐</option>
+      <option value="2">⭐⭐</option>
+      <option value="1">⭐</option>
+    </select>
+  </div>
+  <textarea id="review-content" placeholder="請輸入評價內容" style="width:100%;min-height:100px;margin:10px 0;"></textarea>
+  <div style="text-align:right;">
+    <button onclick="submitReview()">送出</button>
+    <button onclick="closeReviewForm()">取消</button>
   </div>
 </div>
 

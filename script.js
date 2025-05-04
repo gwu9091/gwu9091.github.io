@@ -23,4 +23,35 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
   });
+
+  // 初始化評價系統
+  window.currentProvider = '';
+  
+  window.showReviewForm = function(button) {
+    const provider = button.dataset.provider;
+    window.currentProvider = provider;
+    document.getElementById('review-provider').textContent = `服務者：${provider}`;
+    document.getElementById('review-form').style.display = 'block';
+  }
+  
+  window.closeReviewForm = function() {
+    document.getElementById('review-form').style.display = 'none';
+  }
+  
+  window.submitReview = function() {
+    const rating = document.getElementById('rating').value;
+    const content = document.getElementById('review-content').value;
+    
+    if (!content.trim()) {
+      alert('請輸入評價內容');
+      return;
+    }
+    
+    // 這裡可以加入API呼叫來儲存評價
+    alert('感謝您的評價！');
+    
+    // 清空並關閉表單
+    document.getElementById('review-content').value = '';
+    closeReviewForm();
+  }
 });
