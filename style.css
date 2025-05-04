@@ -18,7 +18,7 @@ header {
 }
 
 nav {
-  background-color: #4a90e2;
+  background-color: transparent;
   padding: 15px;
   position: fixed;
   top: 20px;
@@ -34,7 +34,7 @@ nav {
 }
 
 .nav-link {
-  color: white;
+  color: #333;
   text-decoration: none;
   padding: 10px 20px;
   border-radius: 5px;
