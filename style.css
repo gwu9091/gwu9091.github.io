@@ -83,6 +83,24 @@ footer {
   background-color: #357abd;
 }
 
+.reviews-container {
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.review-item {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+}
+
+.review-date {
+  color: #666;
+  font-size: 0.9em;
+  margin-top: 5px;
+}
+
 @media (max-width: 600px) {
   header {
     padding: 1rem;

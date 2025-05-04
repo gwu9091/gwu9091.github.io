@@ -47,11 +47,48 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
     
-    // 這裡可以加入API呼叫來儲存評價
-    alert('感謝您的評價！');
+    // 創建新評價
+    const review = {
+      provider: window.currentProvider,
+      rating: rating,
+      content: content,
+      date: new Date().toLocaleDateString()
+    };
+    
+    // 獲取現有評價
+    let reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
+    reviews.push(review);
+    
+    // 儲存到 localStorage
+    localStorage.setItem('reviews', JSON.stringify(reviews));
+    
+    // 更新顯示
+    updateReviews(window.currentProvider);
     
     // 清空並關閉表單
     document.getElementById('review-content').value = '';
     closeReviewForm();
+    
+    alert('感謝您的評價！');
+  }
+  
+  // 更新評價顯示
+  function updateReviews(providerName) {
+    const reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
+    const providerReviews = reviews.filter(r => r.provider === providerName);
+    
+    const container = document.querySelector('.reviews-container');
+    if(!container) return;
+    
+    container.innerHTML = `
+      <h4>評價列表</h4>
+      ${providerReviews.map(review => `
+        <div class="review-item">
+          <div>評分: ${'⭐'.repeat(review.rating)}</div>
+          <div>${review.content}</div>
+          <div class="review-date">${review.date}</div>
+        </div>
+      `).join('')}
+    `;
   }
 });
