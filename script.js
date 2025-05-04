@@ -1,4 +1,26 @@
 
+// 登入處理函數
+function handleLogin(event) {
+  event.preventDefault();
+  
+  const email = event.target.querySelector('input[type="email"]').value;
+  const password = event.target.querySelector('input[type="password"]').value;
+  
+  // 這裡可以加入實際的登入驗證邏輯
+  const errorMessage = document.getElementById('error-message');
+  
+  if (!email || !password) {
+    errorMessage.textContent = '請輸入電子郵件和密碼';
+    errorMessage.style.display = 'block';
+    return false;
+  }
+  
+  // 模擬驗證失敗的情況
+  errorMessage.textContent = '帳號或密碼錯誤，請重新輸入';
+  errorMessage.style.display = 'block';
+  return false;
+}
+
 document.addEventListener('DOMContentLoaded', function() {
   // 服務篩選功能
   const serviceIcons = document.querySelectorAll('.service-icon');
