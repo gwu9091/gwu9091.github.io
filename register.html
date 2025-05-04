@@ -11,11 +11,16 @@
   
   <div style="max-width: 400px; margin: 40px auto; padding: 20px;">
     <h2 style="text-align: center">註冊新帳號</h2>
-    <form style="display: flex; flex-direction: column; gap: 15px;">
+    <div id="error-message" style="display: none; color: red; text-align: center; margin-bottom: 15px;"></div>
+    <form id="register-form" style="display: flex; flex-direction: column; gap: 15px;" onsubmit="return handleRegister(event)">
       <input type="text" placeholder="姓名" required style="padding: 10px;">
       <input type="email" placeholder="電子郵件" required style="padding: 10px;">
       <input type="password" placeholder="密碼" required style="padding: 10px;">
       <input type="password" placeholder="確認密碼" required style="padding: 10px;">
+      <div style="display: flex; gap: 10px;">
+        <input type="text" id="captcha-input" placeholder="驗證碼" required style="padding: 10px; flex: 1;">
+        <canvas id="captcha-canvas" style="cursor: pointer;" onclick="refreshCaptcha()"></canvas>
+      </div>
       <button type="submit" style="padding: 10px; background-color: #4a90e2; color: white; border: none; cursor: pointer;">註冊</button>
     </form>
     <p style="text-align: center; margin-top: 20px;">

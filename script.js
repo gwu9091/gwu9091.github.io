@@ -21,7 +21,72 @@ function handleLogin(event) {
   return false;
 }
 
+// 驗證碼相關函數
+let captchaText = '';
+
+function generateCaptcha() {
+  const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  captchaText = '';
+  for (let i = 0; i < 6; i++) {
+    captchaText += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return captchaText;
+}
+
+function drawCaptcha() {
+  const canvas = document.getElementById('captcha-canvas');
+  if (!canvas) return;
+  
+  const ctx = canvas.getContext('2d');
+  canvas.width = 120;
+  canvas.height = 40;
+  
+  // 背景
+  ctx.fillStyle = '#f0f0f0';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  
+  // 文字
+  ctx.font = '24px Arial';
+  ctx.fillStyle = '#333';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(generateCaptcha(), canvas.width/2, canvas.height/2);
+  
+  // 干擾線
+  for (let i = 0; i < 3; i++) {
+    ctx.beginPath();
+    ctx.strokeStyle = '#666';
+    ctx.moveTo(Math.random() * canvas.width, Math.random() * canvas.height);
+    ctx.lineTo(Math.random() * canvas.width, Math.random() * canvas.height);
+    ctx.stroke();
+  }
+}
+
+function refreshCaptcha() {
+  drawCaptcha();
+}
+
+function handleRegister(event) {
+  event.preventDefault();
+  
+  const captchaInput = document.getElementById('captcha-input').value.toUpperCase();
+  const errorMessage = document.getElementById('error-message');
+  
+  if (captchaInput !== captchaText) {
+    errorMessage.textContent = '驗證碼錯誤，請重新輸入';
+    errorMessage.style.display = 'block';
+    drawCaptcha();
+    return false;
+  }
+  
+  // 這裡可以添加其他註冊邏輯
+  
+  return false;
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+  // 初始化驗證碼
+  drawCaptcha();
   // 服務篩選功能
   const serviceIcons = document.querySelectorAll('.service-icon');
   const providers = document.querySelectorAll('.provider');
