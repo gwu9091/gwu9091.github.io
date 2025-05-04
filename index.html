@@ -97,12 +97,4 @@
   &copy; 2025 毛孩到府服務平台 | 保留所有權利
 </footer>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const icons = document.querySelectorAll('.service-icon');
-    icons.forEach(icon => {
-      icon.addEventListener('click', () => {
-        const category = icon.dataset.category;
-        const providers = document.querySelectorAll('.provider');
-        providers.forEach(provider => {
-          const services = provider.getAttribute('data-services')?.split(',
+<script src="script.js"></script>
