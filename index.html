@@ -1,37 +1,115 @@
+<!-- ✅ 從這裡開始貼 -->
+<h1 style="text-align: center">毛孩到府服務平台</h1>
+<p style="text-align: center">一鍵預約專業上門寵物照顧服務</p>
 
-<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>我的網站</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
-</head>
-<body>
-  <header>
-    <h1>歡迎來到我的網站</h1>
-  </header>
-  
-  <main>
-    <section class="intro">
-      <h2>關於我們</h2>
-      <p>這是一個簡單的示範網站，展示基本的網頁設計。</p>
-    </section>
-    
-    <section class="features">
-      <h2>特色功能</h2>
-      <ul>
-        <li>響應式設計</li>
-        <li>現代化界面</li>
-        <li>易於使用</li>
-      </ul>
-    </section>
-  </main>
+<hr>
 
-  <footer>
-    <p>&copy; 2024 我的網站。保留所有權利。</p>
-  </footer>
+<nav style="text-align: center; margin-bottom: 20px;">
+  <a href="#">首頁</a> |
+  <a href="#services">服務項目</a> |
+  <a href="#providers">服務者</a> |
+  <a href="#login">登入</a>
+</nav>
 
-  <script src="script.js"></script>
-</body>
-</html>
+<div style="background-color:#ffc107;padding:30px;text-align:center;color:white;font-size:1.5em">
+  讓毛孩在家也能享受五星級服務！
+</div>
+
+<h2 style="text-align:center;margin-top: 30px">立即搜尋服務</h2>
+<div style="text-align: center;margin: 20px 0">
+  <button class="service-icon" data-category="洗澡美容">🛁 洗澡美容</button>
+  <button class="service-icon" data-category="行為訓練">🎓 行為訓練</button>
+  <button class="service-icon" data-category="到府照護">🦴 到府照護</button>
+  <button class="service-icon" data-category="寵物接送">🚕 寵物接送</button>
+</div>
+
+<h2 id="services" style="text-align:center">服務項目</h2>
+<div style="display: flex;justify-content: center;flex-wrap: wrap;gap: 15px">
+  <div class="service-icon" data-category="洗澡美容" style="cursor: pointer">🛁<br>洗澡美容</div>
+  <div class="service-icon" data-category="行為訓練" style="cursor: pointer">🎓<br>行為訓練</div>
+  <div class="service-icon" data-category="到府照護" style="cursor: pointer">🦴<br>到府照護</div>
+  <div class="service-icon" data-category="寵物接送" style="cursor: pointer">🚕<br>寵物接送</div>
+</div>
+
+<h2 id="providers" style="text-align:center;margin-top: 40px">熱門服務者</h2>
+<div id="provider-list">
+  <!-- 每位服務者加上 data-services -->
+  <div class="provider" data-services="洗澡美容,寵物接送" style="display: flex;align-items: center;margin-bottom: 10px">
+    <img src="https://example.com/petpro1.jpg" style="width: 80px;height: 80px;border-radius: 50%;margin-right: 10px">
+    <div>
+      <strong>小雪美容師</strong><br>
+      ⭐⭐⭐⭐☆ (98 評價)<br>
+      專長：洗澡美容、寵物接送
+    </div>
+  </div>
+  <div class="provider" data-services="洗澡美容" style="display: flex;align-items: center;margin-bottom: 10px">
+    <img src="https://example.com/petpro2.jpg" style="width: 80px;height: 80px;border-radius: 50%;margin-right: 10px">
+    <div>
+      <strong>麗娜美容師</strong><br>
+      ⭐⭐⭐⭐⭐ (185 評價)<br>
+      專長：洗澡美容
+    </div>
+  </div>
+  <div class="provider" data-services="行為訓練,寵物接送" style="display: flex;align-items: center;margin-bottom: 10px">
+    <img src="https://example.com/petpro3.jpg" style="width: 80px;height: 80px;border-radius: 50%;margin-right: 10px">
+    <div>
+      <strong>小華老師</strong><br>
+      ⭐⭐⭐⭐⭐ (305 評價)<br>
+      專長：行為訓練、寵物接送
+    </div>
+  </div>
+  <div class="provider" data-services="行為訓練" style="display: flex;align-items: center;margin-bottom: 10px">
+    <img src="https://example.com/petpro4.jpg" style="width: 80px;height: 80px;border-radius: 50%;margin-right: 10px">
+    <div>
+      <strong>阿偉老師</strong><br>
+      ⭐⭐⭐⭐⭐ (320 評價)<br>
+      專長：行為訓練
+    </div>
+  </div>
+  <div class="provider" data-services="到府照護" style="display: flex;align-items: center;margin-bottom: 10px">
+    <img src="https://example.com/petpro5.jpg" style="width: 80px;height: 80px;border-radius: 50%;margin-right: 10px">
+    <div>
+      <strong>阿傑照護師</strong><br>
+      ⭐⭐⭐⭐⭐ (234 評價)<br>
+      專長：老年寵物照護、到府照護
+    </div>
+  </div>
+  <div class="provider" data-services="到府照護,行為訓練" style="display: flex;align-items: center;margin-bottom: 10px">
+    <img src="https://example.com/petpro6.jpg" style="width: 80px;height: 80px;border-radius: 50%;margin-right: 10px">
+    <div>
+      <strong>小美老師</strong><br>
+      ⭐⭐⭐⭐☆ (128 評價)<br>
+      專長：到府照護、行為訓練
+    </div>
+  </div>
+  <div class="provider" data-services="寵物接送" style="display: flex;align-items: center;margin-bottom: 10px">
+    <img src="https://example.com/petpro7.jpg" style="width: 80px;height: 80px;border-radius: 50%;margin-right: 10px">
+    <div>
+      <strong>阿宏司機</strong><br>
+      ⭐⭐⭐⭐☆ (76 評價)<br>
+      專長：寵物接送
+    </div>
+  </div>
+  <div class="provider" data-services="洗澡美容,寵物接送" style="display: flex;align-items: center;margin-bottom: 10px">
+    <img src="https://example.com/petpro8.jpg" style="width: 80px;height: 80px;border-radius: 50%;margin-right: 10px">
+    <div>
+      <strong>小美美容師</strong><br>
+      ⭐⭐⭐⭐⭐ (212 評價)<br>
+      專長：洗澡美容、寵物接送
+    </div>
+  </div>
+</div>
+
+<footer style="text-align: center;margin-top: 50px;background: #f4f4f4;padding: 15px">
+  &copy; 2025 毛孩到府服務平台 | 保留所有權利
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const icons = document.querySelectorAll('.service-icon');
+    icons.forEach(icon => {
+      icon.addEventListener('click', () => {
+        const category = icon.dataset.category;
+        const providers = document.querySelectorAll('.provider');
+        providers.forEach(provider => {
+          const services = provider.getAttribute('data-services')?.split(',
