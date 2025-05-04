@@ -24,11 +24,13 @@ nav {
   top: 20px;
   right: 20px;
   z-index: 100;
+  width: auto;
 }
 
 .nav-container {
   display: flex;
   gap: 15px;
+  justify-content: flex-end;
 }
 
 .nav-link {
