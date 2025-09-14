@@ -37,43 +37,51 @@
       忘記密碼？<a href="forgot-password.html">重設密碼</a>
     </div>
   </div>
- <footer>
+  <footer>
     <p>
       © 2025 毛孩到府服務平台 | 保留所有權利
     </p>
   </footer>
   <!-- 登入邏輯 -->
-  <script>
-    const {createClient} = supabase;
-    const supabaseClient = createClient(
-      "https://cbmimzpytdmtjvanvaoh.supabase.co",
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNibWltenB5dGRtdGp2YW52YW9oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg0MjE2MzUsImV4cCI6MjA2Mzk5NzYzNX0.YHon747wNSjx6-ZcG-344tlKXtKqXxl-VYu1Vtbusgo"
-    );
+ <script>
+  const { createClient } = supabase;
+  const supabaseClient = createClient(
+    "https://cbmimzpytdmtjvanvaoh.supabase.co",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNibWltenB5dGRtdGp2YW52YW9oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg0MjE2MzUsImV4cCI6MjA2Mzk5NzYzNX0.YHon747wNSjx6-ZcG-344tlKXtKqXxl-VYu1Vtbusgo"
+  );
 
-    document.getElementById("login-form").addEventListener("submit", async function (event) {
-      event.preventDefault();
+  const loginForm = document.getElementById("login-form");
+  const errorMessage = document.getElementById("error-message");
 
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-      const errorMessage = document.getElementById("error-message");
+  loginForm.addEventListener("submit", async function(event) {
+    event.preventDefault();
 
-      const {data, error} = await supabaseClient.auth.signInWithPassword({
-        email,
-        password,
-      });
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
 
-      if (error) {
-        errorMessage.textContent = error.message.includes("Email not confirmed")
-          ? "請先驗證電子郵件，然後再登入。"
-          : "登入失敗：" + error.message;
-        errorMessage.style.display = "block";
-      } else {
-        errorMessage.style.display = "none";
-        alert("登入成功！");
-        window.location.href = "index.html";
-      }
+    const { data, error } = await supabaseClient.auth.signInWithPassword({
+      email,
+      password,
     });
-  </script>
+
+    if (error) {
+      if (error.message.includes("Invalid login credentials")) {
+        errorMessage.textContent = "❌ 帳號或密碼錯誤，請重新輸入";
+      } else if (error.message.includes("Email not confirmed")) {
+        errorMessage.textContent = "❌ 請先驗證電子郵件，然後再登入";
+      } else {
+        errorMessage.textContent = "❌ 登入失敗：" + error.message;
+      }
+      errorMessage.style.display = "block";
+    } else {
+      // 登入成功 → 跳轉首頁
+      errorMessage.style.display = "none";
+      alert("✅ 登入成功！");
+      window.location.href = "index.html";
+    }
+  });
+</script>
+
 </body>
 
 </html>
