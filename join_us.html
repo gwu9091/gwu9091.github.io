@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>加入我們 | 毛孩到府服務平台</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/join_us.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./js/navbar-loader.js"></script>
+  
+</head>
+
+
+<body>
+  <!-- ✅ 導覽列區塊（將由 navbar-loader.js 動態載入） -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- ✅ 頁面橫幅 hero 圖片 -->
+  <div class="hero mt-5" style="background-image: url('./img/dog-1.jpg');">
+    和我們一起改變毛孩的世界
+  </div>
+
+  <!-- ✅ 主內容區 -->
+  <div class="main-container">
+    <main>
+      <h1 class="blue-title" style="margin-top: 30px;">加入我們</h1>
+      <p class="text-center fs-2">一起打造溫暖、專業的寵物照護環境</p>
+      <hr style="margin: 20px 0;">
+
+      <section>
+        <h2>我們的理念</h2>
+        <p>毛孩到府服務平台致力於提供安心、專業的服務體驗。我們正在尋找熱愛毛孩、具責任感的夥伴一同成長。</p>
+      </section>
+
+      <section>
+        <h2>開放職缺</h2>
+        <ul>
+          <li>寵物美容師</li>
+          <li>寵物行為訓練師</li>
+          <li>照護專員</li>
+          <li>接送司機</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>加入我們的優勢</h2>
+        <p>彈性工作時間、平台媒合支援、專業訓練與交流、合作分潤制度，讓你成為自己的主人。</p>
+      </section>
+
+      <section>
+        <h2>應徵方式</h2>
+        <p>填寫下方申請表，我們將儘速與您聯繫。</p>
+
+        <form style="margin-top: 20px;">
+          <textarea placeholder="請簡要介紹您自己..." required></textarea>
+          <br><br>
+          <select required>
+            <option value="" disabled selected>選擇您感興趣的職位</option>
+            <option value="美容師">寵物美容師</option>
+            <option value="訓練師">寵物行為訓練師</option>
+            <option value="照護專員">照護專員</option>
+            <option value="司機">接送司機</option>
+          </select>
+          <br><br>
+          <button type="submit">提交申請</button>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <!-- ✅ 頁尾 -->
+  <footer>
+    © 2025 毛孩到府服務平台 | 保留所有權利
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

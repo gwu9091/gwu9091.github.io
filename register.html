@@ -1,31 +1,128 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="zh-Hant">
+
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>註冊 - 毛孩到府服務平台</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Microsoft JhengHei", sans-serif;
+      background-color: #f2f2f2;
+    }
+
+    .hero {
+      background-color: #4a90e2;
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .card {
+      background-color: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      max-width: 400px;
+      margin: 40px auto;
+    }
+
+    .card input,
+    .card button {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .card button {
+      background-color: #4a90e2;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .card button:hover {
+      background-color: #357abd;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .links {
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
 </head>
+
 <body>
-  <h1 style="text-align: center">毛孩到府服務平台</h1>
-  
-  <div style="max-width: 400px; margin: 40px auto; padding: 20px;">
-    <h2 style="text-align: center">註冊新帳號</h2>
-    <div id="error-message" style="display: none; color: red; text-align: center; margin-bottom: 15px;"></div>
-    <form id="register-form" style="display: flex; flex-direction: column; gap: 15px;" onsubmit="return handleRegister(event)">
-      <input type="text" placeholder="姓名" required style="padding: 10px;">
-      <input type="email" placeholder="電子郵件" required style="padding: 10px;">
-      <input type="password" placeholder="密碼" required style="padding: 10px;">
-      <input type="password" placeholder="確認密碼" required style="padding: 10px;">
-      <div style="display: flex; gap: 10px;">
-        <input type="text" id="captcha-input" placeholder="驗證碼" required style="padding: 10px; flex: 1;">
-        <canvas id="captcha-canvas" style="cursor: pointer;" onclick="refreshCaptcha()"></canvas>
-      </div>
-      <button type="submit" style="padding: 10px; background-color: #4a90e2; color: white; border: none; cursor: pointer;">註冊</button>
-    </form>
-    <p style="text-align: center; margin-top: 20px;">
-      已有帳號？<a href="login.html">立即登入</a>
-    </p>
+  <!-- 導覽列 -->
+  <div id="navbar-placeholder"></div>
+  <script src="navbar-loader.js"></script>
+
+  <!-- 標題區 -->
+  <div class="hero">
+    <h1>毛孩到府服務平台</h1>
+    <p>填寫以下資訊，建立你的帳號</p>
   </div>
+
+  <!-- 註冊表單卡片 -->
+  <div class="card">
+    <h2 class="text-center">註冊</h2>
+    <div id="error-message" style="display: none; color: red; text-align: center; margin-bottom: 10px"></div>
+    <form id="register-form">
+      <input id="email" type="email" placeholder="電子郵件" required />
+      <input id="password" type="password" placeholder="密碼" required />
+      <button type="submit">註冊</button>
+    </form>
+    <div class="links">
+      已有帳號？<a href="login.html">立即登入</a>
+    </div>
+  </div>
+
+  <!-- 註冊邏輯 -->
+  <script>
+    const supabase = window.supabase.createClient(
+      "https://cbmimzpytdmtjvanvaoh.supabase.co",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNibWltenB5dGRtdGp2YW52YW9oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg0MjE2MzUsImV4cCI6MjA2Mzk5NzYzNX0.YHon747wNSjx6-ZcG-344tlKXtKqXxl-VYu1Vtbusgo"
+    );
+
+    document
+      .getElementById("register-form")
+      .addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const errorMessage = document.getElementById("error-message");
+
+        const {data, error} = await supabase.auth.signUp({
+          email,
+          password,
+        });
+
+        if (error) {
+          errorMessage.textContent = "註冊失敗：" + error.message;
+          errorMessage.style.display = "block";
+        } else {
+          errorMessage.style.display = "none";
+          alert("註冊成功，請至信箱點擊驗證信完成驗證！");
+          window.location.href = "login.html";
+        }
+      });
+  </script>
 </body>
+
 </html>

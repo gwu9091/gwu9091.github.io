@@ -1,0 +1,82 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f0f0f0;
+    margin: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+textarea,
+select,
+button {
+    margin-top: 10px;
+    width: 100%;
+    padding: 8px;
+    font-size: 1em;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+h1,
+h2 {
+    color: #007BFF;
+}
+
+#reviews>div {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 8px 0;
+    text-align: left;
+    border-radius: 6px;
+    background: #fafafa;
+}
+
+#review-form {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    width: 300px;
+}
+
+#review-form textarea {
+    width: 100%;
+    min-height: 100px;
+}
+
+#review-form select {
+    width: 100%;
+    padding: 5px;
+}
+
+#review-form button {
+    margin-top: 10px;
+}

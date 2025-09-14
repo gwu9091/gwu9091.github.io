@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>預定服務者｜毛孩到府服務平台</title>
+
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/booking.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+
+  <!-- 載入 supabase-js -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- 載入 navbar-loader.js (請確保這個檔案內有動態載入 navbar 並初始化 supabase 的程式碼) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./js/navbar-loader.js"></script>
+</head>
+
+<body>
+  <!-- 導覽列容器，和主頁、加入我們一樣 -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- 標題區塊 -->
+  <div class="blue-banner mt-5">
+    <h1>預定服務者</h1>
+    <p>選擇適合你的服務者並預約時間</p>
+  </div>
+
+  <div class="main-container">
+
+    <!-- 選擇服務者 -->
+    <div class="form-section">
+      <label for="provider-select">選擇服務者：</label>
+      <select id="provider-select">
+        <option value="">請選擇</option>
+        <option value="小雪美容師">小雪美容師</option>
+        <option value="麗娜美容師">麗娜美容師</option>
+        <option value="小華老師">小華老師</option>
+        <option value="阿偉老師">阿偉老師</option>
+        <option value="阿傑照護師">阿傑照護師</option>
+        <option value="小美老師">小美老師</option>
+        <option value="阿宏司機">阿宏司機</option>
+      </select>
+    </div>
+    <!-- 顯示服務者資訊 -->
+    <div id="provider-info" class="info-section">
+      <img id="provider-img" src="" alt="服務者照片" />
+      <div>
+        <h2 id="provider-name"></h2>
+        <p id="provider-rating"></p>
+        <p id="provider-specialty"></p>
+      </div>
+    </div>
+
+    <!-- 預約表單 -->
+    <form class="form-section" id="booking-form">
+      <label for="owner-name">飼主姓名：</label>
+      <input type="text" id="owner-name" required />
+
+      <label for="pet-name">毛孩姓名：</label>
+      <input type="text" id="pet-name" required />
+
+      <label for="service-type">選擇服務類型：</label>
+      <select id="service-type" required>
+        <option value="">請選擇</option>
+        <option value="洗澡美容">洗澡美容</option>
+        <option value="行為訓練">行為訓練</option>
+        <option value="到府照護">到府照護</option>
+        <option value="寵物接送">寵物接送</option>
+      </select>
+
+      <label for="date">選擇日期：</label>
+      <input type="date" id="date" required />
+
+      <label for="time">選擇時間：</label>
+      <input type="time" id="time" required />
+
+      <button type="submit">提交預約</button>
+    </form>
+  </div>
+  <footer>
+    <p>
+      © 2025 毛孩到府服務平台 | 保留所有權利
+    </p>
+  </footer>
+
+  <!-- 頁尾 -->
+  <script>
+    const providerData = {
+      "小雪美容師": {
+        img: "attached_assets/istockphoto-1214428300-170667a.jpg",
+        rating: "⭐⭐⭐⭐☆ (98 評價)",
+        specialty: "專長：洗澡美容、寵物接送"
+      },
+      "麗娜美容師": {
+        img: "attached_assets/istockphoto-1214428300-170667a.jpg",
+        rating: "⭐⭐⭐⭐⭐ (185 評價)",
+        specialty: "專長：洗澡美容"
+      },
+      "小華老師": {
+        img: "attached_assets/istockphoto-1214428300-170667a.jpg",
+        rating: "⭐⭐⭐⭐⭐ (305 評價)",
+        specialty: "專長：行為訓練、寵物接送"
+      },
+      "阿偉老師": {
+        img: "attached_assets/istockphoto-1214428300-170667a.jpg",
+        rating: "⭐⭐⭐⭐⭐ (320 評價)",
+        specialty: "專長：行為訓練"
+      },
+      "阿傑照護師": {
+        img: "attached_assets/istockphoto-1214428300-170667a.jpg",
+        rating: "⭐⭐⭐⭐⭐ (234 評價)",
+        specialty: "專長：老年寵物照護、到府照護"
+      },
+      "小美老師": {
+        img: "attached_assets/istockphoto-1214428300-170667a.jpg",
+        rating: "⭐⭐⭐⭐☆ (128 評價)",
+        specialty: "專長：到府照護、行為訓練"
+      },
+      "阿宏司機": {
+        img: "attached_assets/istockphoto-1214428300-170667a.jpg",
+        rating: "⭐⭐⭐⭐☆ (76 評價)",
+        specialty: "專長：寵物接送"
+      }
+    };
+
+    document.getElementById('provider-select').addEventListener('change', function () {
+      const selected = this.value;
+      const info = providerData[selected];
+      if (info) {
+        document.getElementById('provider-info').style.display = 'flex';
+        document.getElementById('provider-img').src = info.img;
+        document.getElementById('provider-name').textContent = selected;
+        document.getElementById('provider-rating').textContent = info.rating;
+        document.getElementById('provider-specialty').textContent = info.specialty;
+      } else {
+        document.getElementById('provider-info').style.display = 'none';
+      }
+    });
+
+    // 表單送出示範（可依需求改成向 supabase 或後端送出）
+    document.getElementById('booking-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      alert("預約已提交，我們會儘快聯絡您！");
+      this.reset();
+      document.getElementById('provider-info').style.display = 'none';
+    });
+  </script>
+
+</body>
+
+</html>

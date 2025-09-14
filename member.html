@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>會員中心｜毛孩到府服務平台</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- 載入 navbar-loader.js -->
+  <script src="./js/navbar-loader.js" defer></script>
+
+  <style>
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f7fa;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 100px auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      background-color: #007BFF;
+      color: white;
+      padding: 20px;
+      border-radius: 16px;
+      text-align: center;
+      font-size: 2em;
+    }
+
+    .profile-info {
+      margin-top: 30px;
+    }
+
+    .profile-info p {
+      font-size: 1.2em;
+      margin: 10px 0;
+    }
+
+    .logout-btn {
+      margin-top: 30px;
+      display: inline-block;
+      background-color: #dc3545;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .logout-btn:hover {
+      background-color: #b02a37;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 導覽列容器 -->
+  <div id="navbar-placeholder"></div>
+
+  <div class="container">
+    <h1>會員中心</h1>
+    <div class="profile-info" id="user-info">
+      <p>載入中...</p>
+    </div>
+    <button class="logout-btn" id="logout-btn">登出</button>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      // 等待 navbar 載入完成（確保 supabaseClient 已初始化）
+      document.addEventListener("navbarLoaded", async () => {
+        const supabase = window.supabaseClient;
+        const userInfo = document.getElementById("user-info");
+        const logoutBtn = document.getElementById("logout-btn");
+
+        // 取得目前登入狀態
+        const {data: {session}} = await supabase.auth.getSession();
+
+        if (session && session.user) {
+          const {email, id} = session.user;
+          userInfo.innerHTML = `
+            <p><strong>使用者信箱：</strong> ${email}</p>
+            <p><strong>使用者 ID：</strong> ${id}</p>
+          `;
+          logoutBtn.style.display = "inline-block";
+        } else {
+          userInfo.innerHTML = `
+            <p>尚未登入，請先 <a href="login.html">登入</a>。</p>
+          `;
+          logoutBtn.style.display = "none";
+        }
+
+        // 登出事件
+        logoutBtn.addEventListener("click", async () => {
+          await supabase.auth.signOut();
+          window.location.href = "index.html";
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>

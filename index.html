@@ -1,127 +1,175 @@
-<!-- ✅ 從這裡開始貼 -->
-<nav>
-  <div class="nav-container">
-    <a href="#" class="nav-link">首頁</a>
-    <a href="#services" class="nav-link">服務項目</a>
-    <a href="#providers" class="nav-link">服務者</a>
-    <a href="login.html" class="nav-link">登入</a>
-    <a href="register.html" class="nav-link">註冊</a>
-  </div>
-</nav>
+<!DOCTYPE html>
+<html lang="zh-Hant">
 
-<h1 style="text-align: center; margin-top: 80px;">毛孩到府服務平台</h1>
-<p style="text-align: center">一鍵預約專業上門寵物照顧服務</p>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>毛孩到府服務平台</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/index.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./js/navbar-loader.js"></script>
+</head>
 
-<hr>
+<body>
+  <div id="navbar-placeholder"></div>
 
-<div
-  style="background-image: url('attached_assets/R.jpg'); background-size: cover; background-position: center; padding:80px;text-align:center;color:white;font-size:1.8em; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">
-  讓毛孩在家也能享受五星級服務！
-</div>
+  <div class="full-gray-header mt-5">
+    <h1 class="blue-title text-dark">毛孩到府服務平台</h1>
+    <p>一鍵預約專業上門寵物照顧服務</p>
+  </div>
 
-<h2 id="services" style="text-align:center">服務項目</h2>
-<div style="display: flex;justify-content: center;flex-wrap: wrap;gap: 15px;margin-bottom: 20px">
-  <div class="service-icon active" data-category="all" style="cursor: pointer">👋<br>全部服務</div>
-  <div class="service-icon" data-category="洗澡美容" style="cursor: pointer">🛁<br>洗澡美容</div>
-  <div class="service-icon" data-category="行為訓練" style="cursor: pointer">🎓<br>行為訓練</div>
-  <div class="service-icon" data-category="到府照護" style="cursor: pointer">🦴<br>到府照護</div>
-  <div class="service-icon" data-category="寵物接送" style="cursor: pointer">🚕<br>寵物接送</div>
-</div>
+  <!-- ✅ 主內容區 -->
+  <div class="main-container">
+    <header class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="https://dummyimage.com/700x500" alt=""></div>
+        <div class="swiper-slide"><img src="https://dummyimage.com/700x500" alt=""></div>
+      </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-pagination"></div>
+    </header>
 
-<h2 id="providers" style="text-align:center;margin-top: 40px">熱門服務者</h2>
-<div id="provider-list">
-  <!-- 每位服務者加上 data-services -->
-  <div class="provider" data-services="洗澡美容,寵物接送" style="display: flex;align-items: center;margin-bottom: 10px">
-    <img src="https://example.com/petpro1.jpg" style="width: 80px;height: 80px;border-radius: 50%;margin-right: 10px">
-    <div>
-      <strong>小雪美容師</strong><br>
-      ⭐⭐⭐⭐☆ (98 評價)<br>
-      專長：洗澡美容、寵物接送
+    <div class="Services">
+      <h2 class="text-center fs-2 py-3">服務項目</h2>
+      <div class="row d-flex justify-content-between w-100 m-0" style="padding-left: 150px; padding-right:150px;">
+        <div class="col-lg-2"><div class="service-icon active" data-category="all">👋<br>全部服務</div></div>
+        <div class="col-lg-2"><div class="service-icon" data-category="洗澡美容">🛁<br>洗澡美容</div></div>
+        <div class="col-lg-2"><div class="service-icon" data-category="行為訓練">🎓<br>行為訓練</div></div>
+        <div class="col-lg-2"><div class="service-icon" data-category="到府照護">🦴<br>到府照護</div></div>
+        <div class="col-lg-2"><div class="service-icon" data-category="寵物接送">🚕<br>寵物接送</div></div>
+      </div>
     </div>
-  </div>
-  <div class="provider" data-services="洗澡美容" style="display: flex;align-items: center;margin-bottom: 10px">
-    <img src="https://example.com/petpro2.jpg" style="width: 80px;height: 80px;border-radius: 50%;margin-right: 10px">
-    <div>
-      <strong>麗娜美容師</strong><br>
-      ⭐⭐⭐⭐⭐ (185 評價)<br>
-      專長：洗澡美容
-    </div>
-  </div>
-  <div class="provider" data-services="行為訓練,寵物接送" style="display: flex;align-items: center;margin-bottom: 10px">
-    <img src="https://example.com/petpro3.jpg" style="width: 80px;height: 80px;border-radius: 50%;margin-right: 10px">
-    <div>
-      <strong>小華老師</strong><br>
-      ⭐⭐⭐⭐⭐ (305 評價)<br>
-      專長：行為訓練、寵物接送
-    </div>
-  </div>
-  <div class="provider" data-services="行為訓練" style="display: flex;align-items: center;margin-bottom: 10px">
-    <img src="https://example.com/petpro4.jpg" style="width: 80px;height: 80px;border-radius: 50%;margin-right: 10px">
-    <div>
-      <strong>阿偉老師</strong><br>
-      ⭐⭐⭐⭐⭐ (320 評價)<br>
-      專長：行為訓練
-    </div>
-  </div>
-  <div class="provider" data-services="到府照護" style="display: flex;align-items: center;margin-bottom: 10px">
-    <img src="https://example.com/petpro5.jpg" style="width: 80px;height: 80px;border-radius: 50%;margin-right: 10px">
-    <div>
-      <strong>阿傑照護師</strong><br>
-      ⭐⭐⭐⭐⭐ (234 評價)<br>
-      專長：老年寵物照護、到府照護
-    </div>
-  </div>
-  <div class="provider" data-services="到府照護,行為訓練" style="display: flex;align-items: center;margin-bottom: 10px">
-    <img src="https://example.com/petpro6.jpg" style="width: 80px;height: 80px;border-radius: 50%;margin-right: 10px">
-    <div>
-      <strong>小美老師</strong><br>
-      ⭐⭐⭐⭐☆ (128 評價)<br>
-      專長：到府照護、行為訓練
-    </div>
-  </div>
-  <div class="provider" data-services="寵物接送" style="display: flex;align-items: center;margin-bottom: 10px">
-    <img src="https://example.com/petpro7.jpg" style="width: 80px;height: 80px;border-radius: 50%;margin-right: 10px">
-    <div>
-      <strong>阿宏司機</strong><br>
-      ⭐⭐⭐⭐☆ (76 評價)<br>
-      專長：寵物接送
-    </div>
-  </div>
-  <div class="provider" data-services="洗澡美容,寵物接送" style="display: flex;align-items: center;margin-bottom: 10px">
-    <img src="https://example.com/petpro8.jpg" style="width: 80px;height: 80px;border-radius: 50%;margin-right: 10px">
-    <div>
-      <strong>小美美容師</strong><br>
-      ⭐⭐⭐⭐⭐ (212 評價)<br>
-      專長：洗澡美容、寵物接送
-    </div>
-    <button onclick="showReviewForm(this)" class="review-btn" data-provider="小雪美容師">評價</button>
-    <div class="reviews-container"></div>
-  </div>
-</div>
 
-<!-- 評價表單 -->
-<div id="review-form"
-  style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:white;padding:20px;border-radius:10px;box-shadow:0 0 10px rgba(0,0,0,0.5);z-index:1000;">
-  <h3>新增評價</h3>
-  <p id="review-provider"></p>
-  <div style="margin:10px 0;">
-    評分：<select id="rating">
-      <option value="5">⭐⭐⭐⭐⭐</option>
-      <option value="4">⭐⭐⭐⭐</option>
-      <option value="3">⭐⭐⭐</option>
-      <option value="2">⭐⭐</option>
-      <option value="1">⭐</option>
-    </select>
-  </div>
-  <textarea id="review-content" placeholder="請輸入評價內容" style="width:100%;min-height:100px;margin:10px 0;"></textarea>
-  <div style="text-align:right;">
-    <button onclick="submitReview()">送出</button>
-    <button onclick="closeReviewForm()">取消</button>
-  </div>
-</div>
+    <div id="provider-list">
+      <h2 id="providers" class="fs-2 text-center mt-2">熱門服務者</h2>
 
-<footer style="text-align: center;margin-top: 50px;background: #f4f4f4;padding: 15px">
-  &copy; 2025 毛孩到府服務平台 | 保留所有權利
-</footer>
+      <!-- ✅ 每個服務者都加上 data-provider，方便 JS 動態插入評價 -->
+      <div class="provider" data-provider="小雪美容師" data-services="洗澡美容,寵物接送">
+        <img src="attached_assets/istockphoto-1214428300-170667a.jpg">
+        <div>
+          <strong>小雪美容師</strong><br>
+          <span class="rating">讀取中...</span><br>
+          專長：洗澡美容、寵物接送
+        </div>
+      </div>
 
-<script src="script.js"></script>
+      <div class="provider" data-provider="麗娜美容師" data-services="洗澡美容">
+        <img src="attached_assets/istockphoto-1214428300-170667a.jpg">
+        <div>
+          <strong>麗娜美容師</strong><br>
+          <span class="rating">讀取中...</span><br>
+          專長：洗澡美容
+        </div>
+      </div>
+
+      <div class="provider" data-provider="小華老師" data-services="行為訓練,寵物接送">
+        <img src="attached_assets/istockphoto-1214428300-170667a.jpg">
+        <div>
+          <strong>小華老師</strong><br>
+          <span class="rating">讀取中...</span><br>
+          專長：行為訓練、寵物接送
+        </div>
+      </div>
+
+      <div class="provider" data-provider="阿偉老師" data-services="行為訓練">
+        <img src="attached_assets/istockphoto-1214428300-170667a.jpg">
+        <div>
+          <strong>阿偉老師</strong><br>
+          <span class="rating">讀取中...</span><br>
+          專長：行為訓練
+        </div>
+      </div>
+
+      <div class="provider" data-provider="阿傑照護師" data-services="到府照護">
+        <img src="attached_assets/istockphoto-1214428300-170667a.jpg">
+        <div>
+          <strong>阿傑照護師</strong><br>
+          <span class="rating">讀取中...</span><br>
+          專長：老年寵物照護、到府照護
+        </div>
+      </div>
+
+      <div class="provider" data-provider="小美老師" data-services="到府照護,行為訓練">
+        <img src="attached_assets/istockphoto-1214428300-170667a.jpg">
+        <div>
+          <strong>小美老師</strong><br>
+          <span class="rating">讀取中...</span><br>
+          專長：到府照護、行為訓練
+        </div>
+      </div>
+
+      <div class="provider" data-provider="阿宏司機" data-services="寵物接送">
+        <img src="attached_assets/istockphoto-1214428300-170667a.jpg">
+        <div>
+          <strong>阿宏司機</strong><br>
+          <span class="rating">讀取中...</span><br>
+          專長：寵物接送
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <a href="booking.html">
+        <button class="btn btn-primary ">現在預定</button>
+      </a>
+    </div>
+
+    <footer>
+      <p>© 2025 毛孩到府服務平台 | 保留所有權利</p>
+    </footer>
+  </div>
+
+  <script src="./js/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+  <script>
+    // ✅ 初始化 Swiper
+    var swiper = new Swiper(".mySwiper", {
+      pagination: { el: ".swiper-pagination" },
+      navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+      loop: true,
+    });
+
+    // ✅ 等待 navbar 載入完成後，才初始化 Supabase 並載入評價
+    document.addEventListener("navbarLoaded", () => {
+      if (!window.supabaseClient) {
+        console.error("supabaseClient 尚未初始化");
+        return;
+      }
+      loadRatings();
+    });
+
+    async function loadRatings() {
+      const providers = document.querySelectorAll(".provider");
+      for (const p of providers) {
+        const providerName = p.dataset.provider;
+        const ratingEl = p.querySelector(".rating");
+
+        const { data, error } = await window.supabaseClient
+          .from("reviews")
+          .select("rating")
+          .eq("provider_name", providerName);
+
+        if (error) {
+          ratingEl.textContent = "⚠️ 無法讀取";
+          continue;
+        }
+
+        if (!data || data.length === 0) {
+          ratingEl.textContent = "尚無評價";
+          continue;
+        }
+
+        const avg = data.reduce((acc, r) => acc + r.rating, 0) / data.length;
+        const stars = "⭐".repeat(Math.round(avg)) + "☆".repeat(5 - Math.round(avg));
+        ratingEl.textContent = `${stars} (${data.length} 評價)`;
+      }
+    }
+  </script>
+</body>
+
+</html>
