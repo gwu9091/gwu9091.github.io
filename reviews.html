@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-Hant">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>服務者評價系統 | 毛孩到府服務平台</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/reviews.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+  <!-- 與主頁、加入我們相同的 navbar 占位符 -->
+
+  <div id="navbar-placeholder"></div>
+  <div class="container mt-5">
+    <h1>服務者評價系統</h1>
+    <label for="provider">選擇服務者：</label>
+    <select id="provider" name="provider">
+    </select>
+
+    <label for="rating">星數：</label>
+    <select id="rating" name="rating">
+      <option value="5">⭐⭐⭐⭐⭐</option>
+      <option value="4">⭐⭐⭐⭐</option>
+      <option value="3">⭐⭐⭐</option>
+      <option value="2">⭐⭐</option>
+      <option value="1">⭐</option>
+    </select>
+
+    <textarea id="comment" placeholder="撰寫評價..." rows="4"></textarea>
+    <button id="submit-btn">送出評價</button>
+
+    <hr>
+    <h2>已提交評價</h2><span id="star" class="star-info"></span>
+    <button id="open-modal-btn" class="btn-primary">查看全部評價</button>
+
+    <!-- 初始評論列表（只顯示三筆最新） -->
+    <div id="reviews" class="reviews-list"></div>
+
+    <!-- 覆蓋式視窗 (Modal) -->
+    <div id="reviews-modal" class="modal">
+      <div class="modal-content">
+        <span id="close-modal" class="modal-close">&times;</span>
+        <h3>全部評價</h3>
+        <div id="all-reviews" class="reviews-list"></div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <p>
+      © 2025 毛孩到府服務平台 | 保留所有權利
+    </p>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- 動態載入 navbar 並初始化 supabaseClient -->
+  <script src="./js/navbar-loader.js"></script>
+  <script src="./js/sweetalert-replacer.js"></script>
+  <script src="./js/reviews.js"></script>
+</body>
+
+</html>
