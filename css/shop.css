@@ -1,0 +1,17 @@
+.myposition {
+  position: fixed;     /* ✅ 固定在畫面上 */
+  bottom: 15%;         /* 距離畫面底部 15% */
+  left: 90%;           /* 距離畫面左邊 90%（約右下角） */
+  transform: translate(-50%, 50%); /* ✅ 微調居中位置 */
+  z-index: 9999;       /* 確保顯示在最上層 */
+}
+.padding{
+  padding-top:50px ;
+  padding-bottom:200px ;
+}
+.paybtn{
+  border-radius: 50%;
+  background-color: red;
+  width: 50px;
+  height: 50px;
+}

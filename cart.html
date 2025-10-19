@@ -8,9 +8,6 @@
 
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="./js/navbar-loader.js"></script>
 </head>
 
 <body>
@@ -39,107 +36,12 @@
     © 2025 毛孩到府服務平台 | 保留所有權利
   </footer>
 
-  <script>
-    document.addEventListener("navbarLoaded", async () => {
-      const supabase = window.supabaseClient;
-
-      // 取得登入會員
-      const { data: { session } } = await supabase.auth.getSession();
-      const user = session?.user;
-      if (!user) {
-        alert("請先登入會員，才能使用購物車！");
-        return;
-      }
-
-      const cartItemsDiv = document.getElementById("cart-items");
-      const totalPriceSpan = document.getElementById("total-price");
-
-      let cart = [];
-
-      // 讀取購物車
-      async function loadCart() {
-        const { data, error } = await supabase
-          .from("carts")
-          .select("items")
-          .eq("user_id", user.id)
-          .single();
-
-        cart = data?.items || [];
-        renderCart();
-      }
-
-      // 渲染購物車
-      function renderCart() {
-        if (cart.length === 0) {
-          cartItemsDiv.innerHTML = "<p>購物車是空的</p>";
-          totalPriceSpan.textContent = 0;
-          return;
-        }
-
-        let html = '';
-        let total = 0;
-
-        cart.forEach((item, index) => {
-          total += Number(item.price) * item.quantity;
-          html += `
-            <div class="d-flex justify-content-between align-items-center border-bottom py-2">
-              <div><strong>${item.name}</strong> x ${item.quantity}</div>
-              <div>
-                ${item.price * item.quantity} 元
-                <button class="btn btn-sm btn-outline-danger ms-2" onclick="removeItem(${index})">❌</button>
-              </div>
-            </div>`;
-        });
-
-        cartItemsDiv.innerHTML = html;
-        totalPriceSpan.textContent = total;
-      }
-
-      // 刪除商品
-      window.removeItem = async function(index) {
-        cart.splice(index, 1);
-        await saveCart();
-        renderCart();
-      }
-
-      // 清空購物車
-      document.getElementById("clear-cart").addEventListener("click", async () => {
-        cart = [];
-        await saveCart();
-        renderCart();
-      });
-
-      // 結帳
-      document.getElementById("checkout-btn").addEventListener("click", async () => {
-        if (cart.length === 0) {
-          alert("購物車是空的！");
-          return;
-        }
-        alert("✅ 結帳成功，感謝您的購買！");
-        cart = [];
-        await saveCart();
-        renderCart();
-      });
-
-      // 儲存購物車到 Supabase
-      async function saveCart() {
-        const { data, error } = await supabase
-          .from("carts")
-          .upsert(
-            {
-              user_id: user.id,
-              items: cart,
-              updated_at: new Date().toISOString()
-            },
-            { onConflict: "user_id" } // 若 user_id 存在則更新
-          );
-
-        if (error) console.error("購物車儲存失敗:", error.message);
-      }
-
-      // 初次載入
-      await loadCart();
-    });
-  </script>
+    <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="./js/navbar-loader.js"></script>
+    <script src="./js/sweetalert-replacer.js"></script>
+    <script src="./js/cart.js"></script>
 </body>
+
 </html>

@@ -1,0 +1,234 @@
+/* ----------------------------
+   基本樣式
+---------------------------- */
+body {
+    min-height: 100vh;
+    width: 100%;
+    background-image: url('../img/mebac.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 100px;
+}
+
+/* 容器設定 */
+.container {
+    max-width: 1000px;
+    width: 95%;
+    margin: 2rem auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 標題 */
+h1 {
+    background-color: #007BFF;
+    color: white;
+    padding: 20px;
+    border-radius: 16px;
+    text-align: center;
+    font-size: 2em;
+}
+
+/* 會員資料 */
+.profile-info {
+    margin-top: 30px;
+}
+.profile-info p {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+/* 按鈕 */
+.action-btn {
+    margin-top: 20px;
+    display: inline-block;
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-right: 10px;
+}
+.action-btn:hover {
+    background-color: #0056b3;
+}
+.logout-btn {
+    background-color: #dc3545;
+}
+.logout-btn:hover {
+    background-color: #b02a37;
+}
+.message {
+    margin-top: 10px;
+    font-size: 0.95em;
+}
+
+/* 主體排版 */
+.member-container {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+/* 側邊欄 */
+.sidebar {
+    width: 220px;
+    min-width: 180px;
+    background-color: #0d6efd;
+    color: white;
+    border-radius: 12px;
+    padding: 1rem;
+    height: auto;
+    position: sticky;
+    top: 0;
+    flex-shrink: 0;
+}
+.sidebar h4 {
+    font-size: 1.2rem;
+    border-bottom: 2px solid white;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+.sidebar button {
+    display: block;
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: white;
+    text-align: left;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+.sidebar button:hover,
+.sidebar button.active {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* 主內容區 */
+.content-area {
+    flex: 1;
+    min-width: 250px;
+}
+.hidden {
+    display: none;
+}
+
+/* 歷史訂單容器 */
+.order-scroll {
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: #fff;
+}
+.order-card {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* ----------------------------
+   表格 & RWD 滑動
+---------------------------- */
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* 手機滑順 */
+}
+
+table.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    white-space: nowrap;
+    vertical-align: middle;
+    padding: 0.5rem;
+}
+
+/* input 充滿欄位寬度 */
+.table input.form-control,
+.table select.form-control {
+    width: 100%;
+    box-sizing: border-box;
+    min-width: 80px; /* 避免內容被截斷 */
+}
+
+/* 新增寵物 / 餵食紀錄表單 */
+.pet-tab-content, .order-tab-content, #new-pet-form {
+    width: 100%;
+}
+
+/* ----------------------------
+   RWD 響應式設計
+---------------------------- */
+@media (max-width: 992px) {
+    .member-container {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    .sidebar {
+        width: 100%;
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+        height: auto;
+        padding: 0.5rem;
+    }
+    .sidebar h4 {
+        flex: 1 0 auto;
+        margin-bottom: 0.5rem;
+        text-align: center;
+    }
+    .sidebar button {
+        display: inline-block;
+        margin-right: 0.5rem;
+        text-align: center;
+        padding: 0.5rem 1rem;
+    }
+    .content-area {
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    body {
+        padding-top: 60px;
+    }
+    .container {
+        padding: 15px;
+    }
+    .sidebar button {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.6rem;
+    }
+    table.table {
+        font-size: 0.8rem;
+    }
+    input.form-control, select.form-control, button.btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* 手機或小螢幕，表格最小寬度可滑動 */
+@media (max-width: 768px) {
+    .table-responsive table {
+        min-width: 700px;
+    }
+}

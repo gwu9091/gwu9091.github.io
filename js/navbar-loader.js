@@ -31,9 +31,16 @@ document.addEventListener("DOMContentLoaded", async function() {
         logoutLink.addEventListener("click", async (e) => {
           e.preventDefault();
           await window.supabaseClient.auth.signOut();
+
+          // 顯示原生提示
           alert("您已登出！");
-          location.reload();
+
+          // 2 秒後刷新頁面
+          setTimeout(() => {
+            location.reload();
+          }, 2000);
         });
+
 
         const divider = document.createElement("span");
         divider.className = "divider";

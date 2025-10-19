@@ -9,167 +9,99 @@
   <link rel="stylesheet" href="./css/index.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="./js/navbar-loader.js"></script>
 </head>
 
 <body>
+  <!-- 導覽列 -->
   <div id="navbar-placeholder"></div>
 
+  <!-- 標題區 -->
   <div class="full-gray-header mt-5">
     <h1 class="blue-title text-dark">毛孩到府服務平台</h1>
     <p>一鍵預約專業上門寵物照顧服務</p>
   </div>
 
-  <!-- ✅ 主內容區 -->
+  <!-- 主內容區 -->
   <div class="main-container">
+
+    <!-- Swiper 輪播 -->
     <header class="swiper mySwiper">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide"><img src="https://dummyimage.com/700x500" alt=""></div>
-        <div class="swiper-slide"><img src="https://dummyimage.com/700x500" alt=""></div>
+      <div class="swiper-wrapper" id="news-swiper-wrapper">
+        <!-- JS 動態生成 Swiper Slide -->
       </div>
       <div class="swiper-button-next"></div>
       <div class="swiper-button-prev"></div>
       <div class="swiper-pagination"></div>
     </header>
 
+    <!-- 最新消息區 -->
+    <section id="news-section" class="container mt-5 mb-4">
+      <h2 class="text-center fs-2 py-3">最新消息</h2>
+      <div id="news-list" class="row gy-3">
+        <!-- JS 動態生成新聞 -->
+      </div>
+      <div class="d-flex justify-content-center mt-3">
+        <button id="prev-page" class="btn btn-outline-primary me-2">上一頁</button>
+        <button id="next-page" class="btn btn-outline-primary">下一頁</button>
+      </div>
+    </section>
+
+    <!-- 新聞彈窗 Modal -->
+    <div class="modal fade" id="newsModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="newsModalTitle"></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <img id="newsModalImage" src="" class="img-fluid rounded mb-3" alt="">
+            <p id="newsModalContent"></p>
+            <p class="text-end text-secondary small" id="newsModalAuthor"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 服務項目 -->
+    <h2 class="text-center fs-2 py-3">服務項目</h2>
     <div class="Services">
-      <h2 class="text-center fs-2 py-3">服務項目</h2>
-      <div class="row d-flex justify-content-between w-100 m-0" style="padding-left: 150px; padding-right:150px;">
-        <div class="col-lg-2"><div class="service-icon active" data-category="all">👋<br>全部服務</div></div>
-        <div class="col-lg-2"><div class="service-icon" data-category="洗澡美容">🛁<br>洗澡美容</div></div>
-        <div class="col-lg-2"><div class="service-icon" data-category="行為訓練">🎓<br>行為訓練</div></div>
-        <div class="col-lg-2"><div class="service-icon" data-category="到府照護">🦴<br>到府照護</div></div>
-        <div class="col-lg-2"><div class="service-icon" data-category="寵物接送">🚕<br>寵物接送</div></div>
+      <div class="service-icon active" data-category="all">👋<br>全部服務</div>
+      <div class="service-icon" data-category="洗澡美容">🛁<br>洗澡美容</div>
+      <div class="service-icon" data-category="行為訓練">🎓<br>行為訓練</div>
+      <div class="service-icon" data-category="到府照護">🦴<br>到府照護</div>
+      <div class="service-icon" data-category="寵物接送">🚕<br>寵物接送</div>
+    </div>
+
+    <!-- 熱門服務者 -->
+    <div id="provider-list" class="mt-5">
+      <h2 id="providers" class="fs-2 text-center">熱門服務者</h2>
+      <div class="row" id="providers-container">
+        <!-- JS 動態生成熱門服務者 -->
       </div>
     </div>
 
-    <div id="provider-list">
-      <h2 id="providers" class="fs-2 text-center mt-2">熱門服務者</h2>
-
-      <!-- ✅ 每個服務者都加上 data-provider，方便 JS 動態插入評價 -->
-      <div class="provider" data-provider="小雪美容師" data-services="洗澡美容,寵物接送">
-        <img src="attached_assets/istockphoto-1214428300-170667a.jpg">
-        <div>
-          <strong>小雪美容師</strong><br>
-          <span class="rating">讀取中...</span><br>
-          專長：洗澡美容、寵物接送
-        </div>
-      </div>
-
-      <div class="provider" data-provider="麗娜美容師" data-services="洗澡美容">
-        <img src="attached_assets/istockphoto-1214428300-170667a.jpg">
-        <div>
-          <strong>麗娜美容師</strong><br>
-          <span class="rating">讀取中...</span><br>
-          專長：洗澡美容
-        </div>
-      </div>
-
-      <div class="provider" data-provider="小華老師" data-services="行為訓練,寵物接送">
-        <img src="attached_assets/istockphoto-1214428300-170667a.jpg">
-        <div>
-          <strong>小華老師</strong><br>
-          <span class="rating">讀取中...</span><br>
-          專長：行為訓練、寵物接送
-        </div>
-      </div>
-
-      <div class="provider" data-provider="阿偉老師" data-services="行為訓練">
-        <img src="attached_assets/istockphoto-1214428300-170667a.jpg">
-        <div>
-          <strong>阿偉老師</strong><br>
-          <span class="rating">讀取中...</span><br>
-          專長：行為訓練
-        </div>
-      </div>
-
-      <div class="provider" data-provider="阿傑照護師" data-services="到府照護">
-        <img src="attached_assets/istockphoto-1214428300-170667a.jpg">
-        <div>
-          <strong>阿傑照護師</strong><br>
-          <span class="rating">讀取中...</span><br>
-          專長：老年寵物照護、到府照護
-        </div>
-      </div>
-
-      <div class="provider" data-provider="小美老師" data-services="到府照護,行為訓練">
-        <img src="attached_assets/istockphoto-1214428300-170667a.jpg">
-        <div>
-          <strong>小美老師</strong><br>
-          <span class="rating">讀取中...</span><br>
-          專長：到府照護、行為訓練
-        </div>
-      </div>
-
-      <div class="provider" data-provider="阿宏司機" data-services="寵物接送">
-        <img src="attached_assets/istockphoto-1214428300-170667a.jpg">
-        <div>
-          <strong>阿宏司機</strong><br>
-          <span class="rating">讀取中...</span><br>
-          專長：寵物接送
-        </div>
-      </div>
-    </div>
-
-    <div class="text-center">
+    <!-- 預約按鈕 -->
+    <div class="text-center my-4">
       <a href="booking.html">
-        <button class="btn btn-primary ">現在預定</button>
+        <button class="btn btn-primary btn-lg">現在預定</button>
       </a>
     </div>
 
+    <!-- Footer -->
     <footer>
       <p>© 2025 毛孩到府服務平台 | 保留所有權利</p>
     </footer>
   </div>
 
-  <script src="./js/script.js"></script>
+  <!-- JS 區 -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
-  <script>
-    // ✅ 初始化 Swiper
-    var swiper = new Swiper(".mySwiper", {
-      pagination: { el: ".swiper-pagination" },
-      navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
-      loop: true,
-    });
-
-    // ✅ 等待 navbar 載入完成後，才初始化 Supabase 並載入評價
-    document.addEventListener("navbarLoaded", () => {
-      if (!window.supabaseClient) {
-        console.error("supabaseClient 尚未初始化");
-        return;
-      }
-      loadRatings();
-    });
-
-    async function loadRatings() {
-      const providers = document.querySelectorAll(".provider");
-      for (const p of providers) {
-        const providerName = p.dataset.provider;
-        const ratingEl = p.querySelector(".rating");
-
-        const { data, error } = await window.supabaseClient
-          .from("reviews")
-          .select("rating")
-          .eq("provider_name", providerName);
-
-        if (error) {
-          ratingEl.textContent = "⚠️ 無法讀取";
-          continue;
-        }
-
-        if (!data || data.length === 0) {
-          ratingEl.textContent = "尚無評價";
-          continue;
-        }
-
-        const avg = data.reduce((acc, r) => acc + r.rating, 0) / data.length;
-        const stars = "⭐".repeat(Math.round(avg)) + "☆".repeat(5 - Math.round(avg));
-        ratingEl.textContent = `${stars} (${data.length} 評價)`;
-      }
-    }
-  </script>
+  <script src="./js/navbar-loader.js"></script>
+  <script src="./js/script.js"></script>
+  <script src="./js/sweetalert-replacer.js"></script>
+  <script src="./js/index.js"></script>
 </body>
 
 </html>

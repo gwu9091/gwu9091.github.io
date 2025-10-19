@@ -1,66 +1,104 @@
+/* booking.css */
 
-
-.main-container {
-    max-width: 1200px;
-    margin: 100px auto 40px;
-    padding: 0 20px;
-}
-
-.blue-banner {
-    background-color: #007bff;
-    color: white;
-    padding: 40px 20px 20px;
-    text-align: center;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
-}
-
-.form-section,
-.info-section {
-    background-color: #f9f9f9;
+/* 整體容器 */
+.container {
+    max-width: 700px;
+    margin: 40px auto;
     padding: 20px;
-    border-radius: 16px;
-    margin-top: 20px;
+    background-color: #f9faff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-label {
+/* 標題 */
+h2 {
+    text-align: center;
+    color: #1d4ed8;
+    margin-bottom: 30px;
+}
+
+/* info-section：服務者資訊卡 */
+.info-section {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 15px 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.info-section img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #1d4ed8;
+}
+
+
+.info-section h4 {
+    margin-bottom: 5px;
+    color: #1e40af;
+}
+
+.info-section p {
+    margin: 3px 0;
+    font-size: 14px;
+    color: #374151;
+}
+
+/* 價格顯示 */
+.price-display {
+    font-size: 18px;
     font-weight: bold;
-    display: block;
+    color: #dc2626;
+    margin-bottom: 20px;
+}
+
+/* 表單元素間距 */
+label {
+    font-weight: 500;
     margin-top: 10px;
 }
 
-select,
-input {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-}
-
-button {
-    padding: 10px 20px;
-    margin-top: 20px;
-    font-size: 16px;
-    background-color: #007bff;
-    color: white;
+/* 按鈕 */
+#submit-btn {
+    background-color: #1d4ed8;
     border: none;
-    border-radius: 8px;
-    cursor: pointer;
+    font-weight: bold;
+    padding: 10px;
+    transition: 0.3s;
 }
 
-#provider-info {
-    display: none;
-    align-items: center;
-    margin-top: 20px;
-    gap: 20px;
+#submit-btn:hover {
+    background-color: #2563eb;
 }
 
-#provider-img {
-    width: 150px;
-    height: 150px;
-    border-radius: 20px 20px 0 0;
-    object-fit: cover;
+
+/* 日期與時間選單 */
+#date, #time {
+    margin-bottom: 20px;
 }
 
+/* 時間選單 */
+#time {
+    width: 50%;
+}
+
+/* 適應手機 */
+@media (max-width: 576px) {
+    .info-section {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .info-section img {
+        margin-bottom: 10px;
+    }
+
+    #time {
+        width: 100%;
+    }
+}
