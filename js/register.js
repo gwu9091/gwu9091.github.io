@@ -46,7 +46,7 @@ form.addEventListener("submit", async (event) => {
         errorMessage.textContent = "⚠️ 帳號已存在，請直接登入！";
         setTimeout(() => {
           window.location.href = "login.html";
-        }, 3000);
+        }, 10000);
 
       } else {
         errorMessage.textContent = "註冊失敗：" + error.message;
@@ -60,7 +60,7 @@ form.addEventListener("submit", async (event) => {
       errorMessage.textContent = "✅ 註冊成功，請至信箱點擊驗證信完成驗證！即將跳轉登入頁...";
       setTimeout(() => {
         window.location.href = "login.html";
-      }, 3000);
+      }, 10000);
     }
   } catch (err) {
     errorMessage.textContent = "系統錯誤：" + err.message;
