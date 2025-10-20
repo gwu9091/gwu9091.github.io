@@ -1,12 +1,47 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-
 <style>
-  a{
-    color: black;
+  /* 統一所有文字為白色 */
+  .navbar,
+  .navbar a,
+  .navbar span,
+  .navbar li {
+    color: #ffffff !important;
+  }
+
+  /* 統一連結樣式 */
+  .navbar .nav-link,
+  .navbar .login-btn {
+    color: #ffffff !important;
     text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  /* Hover 效果（微亮） */
+  .navbar .nav-link:hover,
+  .navbar .login-btn:hover {
+    color: #e0e0e0 !important;
+    text-decoration: none;
+  }
+  a{
+    text-decoration: none;
+  }
+
+  /* 目前頁面 (active 狀態) 的顏色 */
+  .navbar .nav-link.active {
+    color: #ffeb3b !important;
+    font-weight: 600;
+  }
+
+  /* 網站名稱（品牌）樣式 */
+  .navbar-brand {
+    color: #ffffff !important;
+    font-weight: 700;
+  }
+
+  .navbar-brand:hover {
+    color: #ffeb3b !important;
   }
 </style>
 
@@ -26,22 +61,22 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link active text-dark" aria-current="page" href="index.html">首頁</a>
+          <a class="nav-link active" aria-current="page" href="index.html">首頁</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark" href="booking.html">服務項目</a>
+          <a class="nav-link" href="booking.html">服務項目</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark" href="reviews.html">評價系統</a>
+          <a class="nav-link" href="reviews.html">評價系統</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark" href="shop.html">商城</a>
+          <a class="nav-link" href="shop.html">商城</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark" href="join_us.html">加入我們</a>
+          <a class="nav-link" href="join_us.html">加入我們</a>
         </li>
         <li class="nav-item">
-          <span id="auth-links" class="nav-link text-dark"></span>
+          <span id="auth-links" class="nav-link"></span>
         </li>
       </ul>
     </div>
