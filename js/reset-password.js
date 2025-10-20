@@ -1,7 +1,7 @@
 
 document.addEventListener("navbarLoaded", () => {
     if (!window.supabaseClient) {
-        console.error("supabaseClient 尚未初始化");
+        // console.error("supabaseClient 尚未初始化");
         return;
     }
 
@@ -47,7 +47,7 @@ document.addEventListener("navbarLoaded", () => {
         } catch (err) {
             message.textContent = "❌ 系統錯誤：" + err.message;
             message.classList.add("text-danger");
-            console.error(err);
+            // console.error(err);
         }
     });
 });

@@ -29,7 +29,10 @@ document.addEventListener("navbarLoaded", async () => {
             .eq("user_id", user.id)
             .maybeSingle();
 
-        if (error) console.error("讀取購物車失敗:", error);
+        if (error) {
+            // console.error("讀取購物車失敗:", error)
+        }
+        ;
         cart = data?.items || [];
         renderCart();
     }
@@ -111,7 +114,7 @@ document.addEventListener("navbarLoaded", async () => {
             alert("✅ 結帳成功，訂單已建立！感謝您的購買！");
 
         } catch (err) {
-            console.error("建立訂單失敗:", err.message);
+            // console.error("建立訂單失敗:", err.message);
             alert("❌ 結帳失敗，請稍後再試！");
         }
     });
@@ -132,7 +135,7 @@ document.addEventListener("navbarLoaded", async () => {
             if (error) throw error;
             return data;
         } catch (err) {
-            console.error("購物車儲存失敗:", err.message);
+            // console.error("購物車儲存失敗:", err.message);
             return null;
         }
     }

@@ -5,7 +5,7 @@
     const script = document.createElement("script");
     script.src = "https://cdn.jsdelivr.net/npm/sweetalert2@11";
     script.onload = () => {
-      console.log("✅ SweetAlert2 已載入，並取代原生 alert()");
+      //console.log("✅ SweetAlert2 已載入，並取代原生 alert()");
 
       // 攔截 alert
       const originalAlert = window.alert;

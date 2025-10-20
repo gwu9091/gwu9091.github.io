@@ -416,7 +416,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             }).join("");
 
         } catch (err) {
-            console.error("載入歷史訂單失敗:", err);
+            // console.error("載入歷史訂單失敗:", err);
             container.innerHTML = `<p>⚠️ 無法載入訂單</p>`;
         }
     }
@@ -870,7 +870,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             }).join("");
 
         } catch (err) {
-            console.error("載入歷史訂單失敗:", err);
+            // console.error("載入歷史訂單失敗:", err);
             container.innerHTML = `<p>⚠️ 無法載入訂單</p>`;
         }
     }
@@ -910,7 +910,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 activeOrderList.appendChild(div);
             });
         } catch (err) {
-            console.error("讀取已預約訂單失敗:", err);
+            // console.error("讀取已預約訂單失敗:", err);
             activeOrderList.innerHTML = "<p>無法載入已預約服務者</p>";
         }
     }
@@ -928,7 +928,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 activeOrderList.appendChild(div);
             });
         } catch (err) {
-            console.error("讀取已預約訂單失敗:", err);
+            // console.error("讀取已預約訂單失敗:", err);
             activeOrderList.innerHTML = "<p>無法載入已預約服務者</p>";
         }
     }

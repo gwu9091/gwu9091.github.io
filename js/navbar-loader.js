@@ -61,12 +61,12 @@ document.addEventListener("DOMContentLoaded", async function() {
         authLinksContainer.appendChild(loginLink);
       }
     } else {
-      console.warn("未找到 id='auth-links' 的元素，請確認 navbar.html 裡有此元素");
+      // console.warn("未找到 id='auth-links' 的元素，請確認 navbar.html 裡有此元素");
     }
 
     // 通知 navbar 載入完成
     document.dispatchEvent(new Event("navbarLoaded"));
   } catch (err) {
-    console.error("導覽列載入錯誤：", err);
+    // console.error("導覽列載入錯誤：", err);
   }
 });

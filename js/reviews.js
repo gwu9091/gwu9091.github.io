@@ -19,7 +19,7 @@ let reviewsVisible = false;
 // ------------------------
 document.addEventListener("navbarLoaded", async () => {
     if (!window.supabaseClient) {
-        console.error("supabaseClient 尚未初始化");
+        // console.error("supabaseClient 尚未初始化");
         return;
     }
     await loadProviders();
@@ -37,7 +37,7 @@ async function loadProviders() {
         .order("name", { ascending: true });
 
     if (error) {
-        console.error("無法讀取服務者名單:", error.message);
+        // console.error("無法讀取服務者名單:", error.message);
         return;
     }
 

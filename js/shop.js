@@ -1,5 +1,5 @@
 document.addEventListener("navbarLoaded", async () => {
-    if (!window.supabaseClient) return console.error("Supabase 尚未初始化");
+    if (!window.supabaseClient) return //console.error("Supabase 尚未初始化");
     const supabase = window.supabaseClient;
 
     const productList = document.getElementById("product-list");
@@ -90,7 +90,7 @@ document.addEventListener("navbarLoaded", async () => {
                         }
                         alert(`${product.name} 已加入購物車`);
                     } catch (err) {
-                        console.error(err);
+                        //console.error(err);
                         alert("加入購物車失敗，請稍後再試");
                     }
                 });

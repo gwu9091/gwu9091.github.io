@@ -12,7 +12,7 @@ let newsSwiper = null;
 // ------------------------
 document.addEventListener("navbarLoaded", async () => {
   if (!window.supabaseClient) {
-    console.error("Supabase Client 尚未初始化！");
+    // console.error("Supabase Client 尚未初始化！");
     return;
   }
   const supabase = window.supabaseClient;
@@ -39,7 +39,7 @@ document.addEventListener("navbarLoaded", async () => {
       });
     });
   } catch (err) {
-    console.error("讀取 Providers 失敗：", err);
+    // console.error("讀取 Providers 失敗：", err);
   }
 
   function renderProviders(providers) {
@@ -154,7 +154,7 @@ document.addEventListener("navbarLoaded", async () => {
       nextBtn.disabled = page * pageSize >= totalNews;
 
     } catch (err) {
-      console.error("載入新聞失敗：", err);
+      // console.error("載入新聞失敗：", err);
       newsList.innerHTML = `<p class="text-center text-danger">載入新聞時發生錯誤。</p>`;
     }
   }
@@ -214,7 +214,7 @@ document.addEventListener("navbarLoaded", async () => {
       });
 
     } catch (err) {
-      console.error("載入 Swiper 新聞失敗：", err);
+      // console.error("載入 Swiper 新聞失敗：", err);
     }
   }
 
