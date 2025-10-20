@@ -1,7 +1,7 @@
 // booking.js
 document.addEventListener("navbarLoaded", async () => {
     const supabase = window.supabaseClient;
-    if (!supabase) return console.error("Supabase 尚未初始化");
+    if (!supabase) return //console.error("Supabase 尚未初始化");
 
     const providerSelect = document.getElementById('provider-select');
     const serviceTypeSelect = document.getElementById('service-type');
@@ -33,7 +33,7 @@ document.addEventListener("navbarLoaded", async () => {
         .order('created_at', { ascending: true });
 
     if (providerError) {
-        console.error("讀取 providers 失敗:", providerError);
+        // console.error("讀取 providers 失敗:", providerError);
         providerSelect.innerHTML = `<option disabled>無法載入服務者</option>`;
         return;
     }
@@ -52,7 +52,8 @@ document.addEventListener("navbarLoaded", async () => {
         .from('services')
         .select('*');
 
-    if (serviceError) console.error("讀取 services 失敗:", serviceError);
+    if (serviceError) {//console.error("讀取 services 失敗:", serviceError) 
+    }
     else services.forEach(s => servicePrices[s.name] = s.price);
 
     serviceTypeSelect.innerHTML = `<option value="" disabled selected>請選擇</option>`;

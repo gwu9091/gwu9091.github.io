@@ -49,7 +49,7 @@ loginForm.addEventListener("submit", async function (event) {
  
         }
     } catch (err) {
-        console.error(err);
+        // console.error(err);
         errorMessage.textContent = "❌ 登入過程發生錯誤，請稍後再試";
         errorMessage.style.display = "block";
     }

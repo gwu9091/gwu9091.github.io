@@ -5,44 +5,47 @@
   padding: 0;
 }
 
-html, body {
+html {
   height: 100%;
   font-family: "Microsoft JhengHei", sans-serif;
   background: linear-gradient(to bottom, #e0f0ff, #f2f2f2);
 }
+body{
+  height: 100vh ;
+}
 
+/* 若頁面有 fixed-top 導覽列，預留上方空間 */
 body {
   display: flex;
   flex-direction: column;
   justify-content: center; /* 垂直置中 */
   align-items: center;     /* 水平置中 */
-  overflow: hidden;        /* 避免爆版滾動 */
+  overflow: hidden;
+  padding-top: 80px; /* 🟡 預留 Navbar 高度，避免被擋住 */
 }
 
 /* Hero + Card 容器 */
 main {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  height: 100%;
+  height: calc(100vh - 16px); /* 🟡 預留導覽列 */
   width: 100%;
 }
 
-/* Hero 區域 - 滿寬 */
+/* Hero 區域 */
 .hero {
+  margin-top: 56px;
   width: 100%;
-  max-height: 40vh; /* 高度自適應，最多 40% 螢幕高度 */
+  height: 30%;
   background: url('../img/dog-1.jpg') no-repeat center center;
-  background-size: cover; /* 圖片滿寬 */
+  background-size: cover;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   color: white;
-  font-size: 1.8em;
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
-  padding: 20px;
 }
 
 /* 登入卡片 */
@@ -52,7 +55,6 @@ main {
   padding: 30px 20px;
   max-width: 400px;
   width: 90%;
-  margin-top: -50px; /* 卡片略微重疊 hero */
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
@@ -66,11 +68,13 @@ main {
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 10px;
+  transition: 0.2s;
 }
 
 .login-card input:focus {
   border-color: #4a90e2;
   outline: none;
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
 }
 
 /* 按鈕 */
@@ -83,6 +87,7 @@ main {
   background-color: #4a90e2;
   color: white;
   cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 .login-card button:hover {
@@ -102,4 +107,14 @@ main {
 
 .links a:hover {
   text-decoration: underline;
+}
+@media (max-width: 576px) {
+  .login-card {
+    padding: 20px 15px;
+  }
+
+  .hero {
+    font-size: 1.4em;
+    padding: 15px;
+  }
 }
