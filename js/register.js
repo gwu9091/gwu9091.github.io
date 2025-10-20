@@ -1,6 +1,6 @@
 // 初始化 Supabase
 const supabaseClient = supabase.createClient(
-  "https://cbmimzpytdmtjvanvaoh.supabase.co",
+      "https://cbmimzpytdmtjvanvaoh.supabase.co",
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNibWltenB5dGRtdGp2YW52YW9oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg0MjE2MzUsImV4cCI6MjA2Mzk5NzYzNX0.YHon747wNSjx6-ZcG-344tlKXtKqXxl-VYu1Vtbusgo"
 );
 
