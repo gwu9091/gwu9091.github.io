@@ -7,8 +7,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // 初始化 Supabase client
   const supabaseClient = supabase.createClient(
-          "https://cbmimzpytdmtjvanvaoh.supabase.co",
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNibWltenB5dGRtdGp2YW52YW9oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg0MjE2MzUsImV4cCI6MjA2Mzk5NzYzNX0.YHon747wNSjx6-ZcG-344tlKXtKqXxl-VYu1Vtbusgo"
+    "https://cbmimzpytdmtjvanvaoh.supabase.co",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNibWltenB5dGRtdGp2YW52YW9oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg0MjE2MzUsImV4cCI6MjA2Mzk5NzYzNX0.YHon747wNSjx6-ZcG-344tlKXtKqXxl-VYu1Vtbusgo"
   );
 
   // 取得 DOM 元素
@@ -61,8 +61,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         );
       } else {
         // 登入後修改密碼
-        const user = supabaseClient.auth.getUser(); // 確保使用者已登入
-        if (!user) {
+        const { data: userData } = await supabaseClient.auth.getUser();
+        if (!userData || !userData.user) {
           message.textContent = "❌ 尚未登入，無法修改密碼";
           message.classList.add("text-danger");
           return;
@@ -70,8 +70,18 @@ document.addEventListener("DOMContentLoaded", async () => {
         result = await supabaseClient.auth.updateUser({ password: newPassword });
       }
 
+      // 錯誤處理與翻譯
       if (result.error) {
-        message.textContent = "❌ 更新失敗：" + result.error.message;
+        let errMsg = result.error.message;
+
+        // 🔹 翻譯常見錯誤訊息
+        if (errMsg.includes("Password should contain at least one character")) {
+          errMsg = "密碼需包含大小寫字母與數字（例如 Abc123）。";
+        } else if (errMsg.includes("Email address") && errMsg.includes("invalid")) {
+          errMsg = "信箱格式無效，請輸入正確的電子郵件地址。";
+        }
+
+        message.textContent = "❌ 更新失敗：" + errMsg;
         message.classList.add("text-danger");
       } else {
         message.textContent = "✅ 密碼已成功更新！即將導向首頁...";
