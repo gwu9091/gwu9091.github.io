@@ -24,7 +24,8 @@
     color: #e0e0e0 !important;
     text-decoration: none;
   }
-  a{
+
+  a {
     text-decoration: none;
   }
 
@@ -43,6 +44,10 @@
   .navbar-brand:hover {
     color: #ffeb3b !important;
   }
+  .app{
+      border: 1px #ffeb3b  solid;
+      padding: 10px;
+  }
 </style>
 
 <!-- Bootstrap Navbar -->
@@ -50,7 +55,8 @@
   <div class="container-fluid">
     <!-- 網站 Logo / 名稱 -->
     <a class="navbar-brand fw-bold" href="index.html">毛孩到府服務平台</a>
-
+    <!-- 手機版中間的下載連結（只在手機版顯示） -->
+    <a href="./apk/毛孩到府服務平台v1.apk" class="nav-link text-white d-lg-none mx-3 app">下載app</a>
     <!-- 漢堡選單按鈕 (手機版展開用) -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="切換導覽">
