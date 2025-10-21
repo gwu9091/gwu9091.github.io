@@ -1,7 +1,13 @@
 // ============================
 // index.js
 // ============================
+document.addEventListener("DOMContentLoaded", () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const from = urlParams.get("from");
 
+  if (from === "email") {
+    alert("✅ 帳號已成功驗證！");
+  }})
 // ------------------------
 // Swiper 初始化（空白先初始化，稍後會重新載入最新新聞）
 // ------------------------
