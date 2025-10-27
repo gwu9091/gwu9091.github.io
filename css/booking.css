@@ -2,13 +2,13 @@
 
 /* 整體容器 */
 .container {
-    height: 100vh;
+    height: 100%;
     max-width: 700px;
     margin: 40px auto;
     padding: 20px;
     background-color: #f9faff;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* 標題 */
@@ -27,7 +27,7 @@ h2 {
     padding: 15px 20px;
     border-radius: 10px;
     margin-bottom: 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .info-section img {
@@ -79,13 +79,18 @@ label {
 
 
 /* 日期與時間選單 */
-#date, #time {
+#date,
+#time {
     margin-bottom: 20px;
 }
 
 /* 時間選單 */
 #time {
     width: 50%;
+}
+
+footer {
+    margin-top: auto;
 }
 
 /* 適應手機 */
