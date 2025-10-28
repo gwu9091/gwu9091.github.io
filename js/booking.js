@@ -1,5 +1,7 @@
-// booking.js
 document.addEventListener("navbarLoaded", async () => {
+    // 固定的服務時間列表
+    const FIXED_SERVICE_TIMES = ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00"];
+
     const supabase = window.supabaseClient;
     if (!supabase) return //console.error("Supabase 尚未初始化");
 
@@ -22,10 +24,69 @@ document.addEventListener("navbarLoaded", async () => {
     const currentUser = session?.user;
     if (!currentUser) {
         return alert("請先登入").then(() => {
-          window.location.href = "./login.html";
-        });}
+            window.location.href = "./login.html";
+        });
+    }
+
+    // ------------------------
+    // 核心功能：載入並自動填入會員資料
+    // ------------------------
+    let hasPet = false;
+    async function loadAndAutoFillUserData() {
+        // 載入會員姓名 (owner-name)
+        const { data: profile } = await supabase
+            .from("profiles")
+            .select("full_name")
+            .eq("user_id", currentUser.id)
+            .single();
+        if (profile?.full_name) {
+            ownerInput.value = profile.full_name;
+        }
+
+        // 載入寵物姓名 (pet-name)
+        const { data: pet } = await supabase
+            .from("pets")
+            .select("pet_name")
+            .eq("user_id", currentUser.id)
+            .limit(1)
+            .maybeSingle();
+        
+        if (pet?.pet_name) {
+            petInput.value = pet.pet_name;
+            petInput.disabled = false; // **修正點：允許編輯**
+            hasPet = true;
+        } else {
+            petInput.value = '請先在會員中心新增寵物';
+            petInput.disabled = true;
+            hasPet = false;
+            submitBtn.disabled = true; // 無寵物則禁用預約按鈕
+        }
+    }
 
 
+    // --- 輔助函式：初始化時間選擇器 ---
+    function updateTimeInputOptions(availableTimes) {
+        timeInput.innerHTML = `<option value="" disabled selected>請選擇時間</option>`;
+        if (availableTimes && availableTimes.length > 0) {
+            availableTimes.forEach(t => {
+                const opt = document.createElement('option');
+                opt.value = t;
+                opt.textContent = t;
+                timeInput.appendChild(opt);
+            });
+        } else {
+            const opt = document.createElement('option');
+            opt.value = '';
+            opt.textContent = '該日已無可用時間';
+            timeInput.appendChild(opt);
+            timeInput.value = '';
+        }
+    }
+    
+    // ------------------------
+    // 服務者、服務項目等初始化邏輯...
+    // ------------------------
+    
     // 1️⃣ 讀取服務者列表
     const { data: providers, error: providerError } = await supabase
         .from('providers')
@@ -33,7 +94,6 @@ document.addEventListener("navbarLoaded", async () => {
         .order('created_at', { ascending: true });
 
     if (providerError) {
-        // console.error("讀取 providers 失敗:", providerError);
         providerSelect.innerHTML = `<option disabled>無法載入服務者</option>`;
         return;
     }
@@ -41,7 +101,7 @@ document.addEventListener("navbarLoaded", async () => {
     providerSelect.innerHTML = `<option value="" disabled selected>請選擇服務者</option>`;
     providers.forEach(p => {
         const option = document.createElement('option');
-        option.value = p.id; // 這裡改成使用 provider_id
+        option.value = p.id;
         option.textContent = p.name;
         providerSelect.appendChild(option);
     });
@@ -52,9 +112,7 @@ document.addEventListener("navbarLoaded", async () => {
         .from('services')
         .select('*');
 
-    if (serviceError) {//console.error("讀取 services 失敗:", serviceError) 
-    }
-    else services.forEach(s => servicePrices[s.name] = s.price);
+    if (!serviceError) services.forEach(s => servicePrices[s.name] = s.price);
 
     serviceTypeSelect.innerHTML = `<option value="" disabled selected>請選擇</option>`;
     services.forEach(s => {
@@ -63,6 +121,22 @@ document.addEventListener("navbarLoaded", async () => {
         opt.textContent = s.name;
         serviceTypeSelect.appendChild(opt);
     });
+    
+    // --- 輔助函式：讀取評價 ---
+    async function loadRating(providerName) {
+        const { data, error } = await supabase
+            .from("reviews")
+            .select("rating")
+            .eq("provider_name", providerName);
+
+        if (error) { ratingEl.textContent = "⚠️ 無法讀取評價"; return; }
+        if (!data || data.length === 0) { ratingEl.textContent = "尚無評價"; return; }
+
+        const avg = data.reduce((acc, r) => acc + r.rating, 0) / data.length;
+        const stars = "⭐".repeat(Math.round(avg)) + "☆".repeat(5 - Math.round(avg));
+        ratingEl.textContent = `${stars} (${data.length} 評價)`;
+    }
+
 
     // 3️⃣ 選服務者 → 顯示資訊
     providerSelect.addEventListener('change', async () => {
@@ -71,16 +145,17 @@ document.addEventListener("navbarLoaded", async () => {
 
         if (info) {
             providerInfoDiv.style.display = 'flex';
-            providerImg.src = info.img;
+            providerImg.src = info.img || './img/user.png';
             providerNameEl.textContent = info.name;
             providerSpecialtyEl.textContent = info.specialty;
             await loadRating(info.name);
 
             dateInput.value = '';
-            timeInput.innerHTML = `<option value="" disabled selected>請選擇時間</option>`;
+            updateTimeInputOptions(null);
         } else {
             providerInfoDiv.style.display = 'none';
         }
+        priceEl.textContent = `價格：- 元`;
     });
 
     // 4️⃣ 選服務類型 → 顯示價格
@@ -94,7 +169,10 @@ document.addEventListener("navbarLoaded", async () => {
     dateInput.addEventListener('change', async () => {
         const selectedDate = dateInput.value;
         const providerId = providerSelect.value;
-        if (!selectedDate || !providerId) return;
+        
+        if (!selectedDate || !providerId) {
+            return updateTimeInputOptions(null);
+        }
 
         const { data: bookings } = await supabase
             .from('bookings')
@@ -103,56 +181,36 @@ document.addEventListener("navbarLoaded", async () => {
             .eq('date', selectedDate);
 
         const bookedTimes = bookings ? bookings.map(b => b.time) : [];
-        const allTimes = Array.from({ length: 10 }, (_, i) => `${9 + i}:00`);
-        const availableTimes = allTimes.filter(t => !bookedTimes.includes(t));
+        let availableTimes = FIXED_SERVICE_TIMES.filter(t => !bookedTimes.includes(t));
 
-        timeInput.innerHTML = '';
-        if (availableTimes.length > 0) {
-            availableTimes.forEach(t => {
-                const opt = document.createElement('option');
-                opt.value = t;
-                opt.textContent = t;
-                timeInput.appendChild(opt);
+        // 核心修正: 排除當天已過時段
+        const todayString = new Date().toISOString().split('T')[0];
+        if (selectedDate === todayString) {
+            const now = new Date();
+            const currentHour = now.getHours();
+            
+            availableTimes = availableTimes.filter(t => {
+                const hour = parseInt(t.split(':')[0], 10);
+                return hour > currentHour; 
             });
-        } else {
-            const opt = document.createElement('option');
-            opt.value = '';
-            opt.textContent = '該日已無可用時間';
-            timeInput.appendChild(opt);
         }
+        
+        updateTimeInputOptions(availableTimes);
     });
-
-    // 6️⃣ 讀取評價
-    async function loadRating(providerName) {
-        const { data, error } = await supabase
-            .from("reviews")
-            .select("rating")
-            .eq("provider_name", providerName);
-
-        if (error) {
-            ratingEl.textContent = "⚠️ 無法讀取評價";
-            return;
-        }
-
-        if (!data || data.length === 0) {
-            ratingEl.textContent = "尚無評價";
-            return;
-        }
-
-        const avg = data.reduce((acc, r) => acc + r.rating, 0) / data.length;
-        const stars = "⭐".repeat(Math.round(avg)) + "☆".repeat(5 - Math.round(avg));
-        ratingEl.textContent = `${stars} (${data.length} 評價)`;
-    }
 
     // 7️⃣ 提交預約
     submitBtn.addEventListener('click', async () => {
+        if (!hasPet) {
+             return alert("請先在會員中心新增您的寵物資料！");
+        }
+
         const providerId = providerSelect.value;
         const providerName = providers.find(p => p.id == providerId)?.name;
         const serviceType = serviceTypeSelect.value;
         const date = dateInput.value;
         const time = timeInput.value;
         const ownerName = ownerInput.value;
-        const petName = petInput.value;
+        const petName = petInput.value; // **使用使用者可能修改過的值**
         const price = servicePrices[serviceType] || 0;
 
         if (!providerId || !serviceType || !date || !time || !ownerName || !petName) {
@@ -177,14 +235,24 @@ document.addEventListener("navbarLoaded", async () => {
         if (error) alert("預約失敗：" + error.message);
         else {
             alert(`預約成功！\n服務者：${providerName}\n日期：${date} ${time}\n價格：${price} 元`);
+            
+            // 提交成功後，只重置預約相關欄位，保留會員資料和寵物資料的當前值
             providerSelect.value = '';
             providerInfoDiv.style.display = 'none';
             serviceTypeSelect.value = '';
             priceEl.textContent = `價格：- 元`;
-            dateInput.value = '';
-            timeInput.innerHTML = `<option value="" disabled selected>請選擇時間</option>`;
-            ownerInput.value = '';
-            petInput.value = '';
+            dateInput.value = new Date().toISOString().split('T')[0];
+            updateTimeInputOptions(null);
         }
     });
+
+
+    // ------------------------
+    // 初始化
+    // ------------------------
+    await loadAndAutoFillUserData(); // 呼叫自動填入功能
+    
+    // 初始化日期限制
+    dateInput.min = new Date().toISOString().split('T')[0];
+    updateTimeInputOptions(FIXED_SERVICE_TIMES);
 });

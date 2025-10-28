@@ -87,11 +87,11 @@ submitBtn.addEventListener("click", async () => {
     const user_id = session.user.id;
 
     // ------------------------
-    // 1️⃣ 檢查是否有預約紀錄
+    // 1️⃣ 檢查是否有預約紀錄 (性能優化: 只檢查數量)
     // ------------------------
-    const { data: bookings, error: bookingsError } = await window.supabaseClient
+    const { count: bookingsCount, error: bookingsError } = await window.supabaseClient
         .from("bookings")
-        .select("*")
+        .select("id", { count: "exact", head: true }) // 查詢優化
         .eq("user_id", user_id)
         .eq("provider_name", provider);
 
@@ -100,23 +100,21 @@ submitBtn.addEventListener("click", async () => {
         return;
     }
 
-    if (!bookings || bookings.length === 0) {
+    if (bookingsCount === 0) { // 依據優化後的 count 檢查邏輯
         alert("⚠️ 您尚未預約過此服務者，無法評論");
         return;
     }
 
     // ------------------------
-    // 2️⃣ 檢查是否已經評論過
+    // 2️⃣ 檢查是否已經評論過 (性能優化: 只檢查數量)
     // ------------------------
-    const { data: existingReview } = await window.supabaseClient
+    const { count: reviewCount } = await window.supabaseClient
         .from("reviews")
-        .select("*")
+        .select("id", { count: "exact", head: true }) // 查詢優化
         .eq("provider_name", provider)
-        .eq("user_id", user_id)
-        .limit(1)
-        .maybeSingle();
+        .eq("user_id", user_id);
 
-    if (existingReview) {
+    if (reviewCount > 0) { // 依據優化後的 count 檢查邏輯
         alert("⚠️ 您已對此服務者評論過，無法重複評論");
         return;
     }
