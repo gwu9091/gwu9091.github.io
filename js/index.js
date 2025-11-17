@@ -186,7 +186,7 @@ document.addEventListener("navbarLoaded", async () => {
         .from("news")
         .select("*")
         .order("created_at", { ascending: false })
-        .limit(3);
+        .limit(5);
       if (error) throw error;
 
       swiperWrapper.innerHTML = ""; // 清空
