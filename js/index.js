@@ -57,7 +57,7 @@ document.addEventListener("navbarLoaded", async () => {
       div.dataset.provider = p.name;
       div.dataset.services = p.specialty;
       div.innerHTML = `
-        <img src="${p.img}" class="img-fluid rounded">
+        <img src="${p.img}" class="img-fluid rounded-circle ">
         <div>
           <strong>${p.name}</strong><br>
           <span class="rating">讀取中...</span><br>
