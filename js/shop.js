@@ -4,7 +4,7 @@ document.addEventListener("navbarLoaded", async () => {
 
     const productList = document.getElementById("product-list");
     const payBtn = document.querySelector('#pay');
-
+    
     // 取得登入會員
     const { data: { session } } = await supabase.auth.getSession();
     const currentUser = session?.user;
@@ -20,15 +20,28 @@ document.addEventListener("navbarLoaded", async () => {
         window.location.href = "./cart.html";
     });
 
-    // 載入商品
-    async function loadProducts() {
+    // 載入商品 (新增 searchTerm 參數)
+    async function loadProducts(searchTerm = '') {
         try {
-            const { data, error } = await supabase
+            let query = supabase
                 .from("products")
                 .select("*")
                 .order("created_at", { ascending: false });
 
+            // 判斷是否有搜尋關鍵字，並新增篩選條件
+            if (searchTerm) {
+                // 使用 OR 條件，搜尋商品名稱或描述中包含關鍵字的商品 (ilike: 不區分大小寫)
+                query = query.or(`name.ilike.%${searchTerm}%,description.ilike.%${searchTerm}%`);
+            }
+            
+            const { data, error } = await query;
+
             if (error) throw error;
+            
+            if (data.length === 0) {
+                 productList.innerHTML = `<p class="text-center text-muted">查無相關商品。</p>`;
+                 return;
+            }
 
             productList.innerHTML = data.map(p => `
                 <div class="col-md-3">
@@ -100,5 +113,21 @@ document.addEventListener("navbarLoaded", async () => {
             productList.innerHTML = `<p class="text-danger">無法讀取商品資料：${err.message}</p>`;
         }
     }
+
+    // 監聽搜尋輸入框 (Debounce 處理)
+    const searchInput = document.getElementById('search-input');
+    let searchTimeout;
+
+    if (searchInput) {
+        searchInput.addEventListener('input', () => {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                const searchTerm = searchInput.value.trim();
+                loadProducts(searchTerm);
+            }, 300); // 延遲 300ms 執行搜尋
+        });
+    }
+
+    // 首次載入商品
     loadProducts();
 });
