@@ -217,6 +217,10 @@ document.addEventListener("navbarLoaded", async () => {
         pagination: { el: ".swiper-pagination" },
         navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
         loop: true,
+        autoplay: {
+        delay: 5000,
+        disableOnInteraction: true,
+      },
       });
 
     } catch (err) {
