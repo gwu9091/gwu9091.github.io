@@ -42,7 +42,7 @@ html, body {
 /* ---------- Swiper ---------- */
 .swiper {
     width: 100%;
-    height: 500px;
+    aspect-ratio: 21 / 9; /* 固定 21:9 比例 */
 }
 
 .swiper-slide {
@@ -54,11 +54,11 @@ html, body {
     align-items: center;
 }
 
+
 .swiper-slide img {
-    display: block;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover; /* 保持圖片完整覆蓋 */
 }
 
 /* ---------- 最新消息 ---------- */
@@ -239,6 +239,6 @@ button:hover, .btn:hover {
 
 @media (max-width: 767px) {
     .swiper {
-        height: 250px;        /* 手機高度 */
+        aspect-ratio: 21 / 9; /* 手機依舊保持 21:9 */
     }
 }
