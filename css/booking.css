@@ -4,7 +4,7 @@
 .container {
     /* 已移除 height: 100vh; 以修正在小螢幕下頁尾位置不正確的問題 */
     max-width: 700px;
-    margin: 66px auto;
+    margin: 56px auto;
     padding: 20px;
     background-color: #f9faff;
     border-radius: 12px;
