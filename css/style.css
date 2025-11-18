@@ -84,6 +84,12 @@ footer p {
   h1 {
     font-size: 2rem;
   }
+
+  footer p {
+    font-size: 0.99rem;
+    margin: 0;
+    font-weight: bold;
+  }
 }
 
 button:hover {
