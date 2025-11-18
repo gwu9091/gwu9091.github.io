@@ -4,7 +4,7 @@
 .container {
     /* 已移除 height: 100vh; 以修正在小螢幕下頁尾位置不正確的問題 */
     max-width: 700px;
-    margin: 40px auto;
+    margin: 66px auto;
     padding: 20px;
     background-color: #f9faff;
     border-radius: 12px;
@@ -12,7 +12,7 @@
 }
 
 /* 標題 */
-h2 {
+h1 {
     text-align: center;
     color: #1d4ed8;
     margin-bottom: 30px;
