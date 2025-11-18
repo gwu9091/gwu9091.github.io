@@ -91,6 +91,8 @@ label {
 
 footer {
     margin-top: auto;
+    position: fixed;
+    bottom: 0;
 }
 
 /* 適應手機 */

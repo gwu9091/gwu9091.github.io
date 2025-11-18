@@ -12,10 +12,6 @@ html, body {
     text-align: center; /* 全域文字置中 */
 }
 
-/* ---------- Navbar 占位 ---------- */
-#navbar-placeholder {
-    width: 100%;
-}
 
 /* ---------- 全灰標題區 ---------- */
 .full-gray-header {
@@ -60,6 +56,7 @@ html, body {
     height: 100%;
     object-fit: cover; /* 保持圖片完整覆蓋 */
 }
+
 
 /* ---------- 最新消息 ---------- */
 #news-list {

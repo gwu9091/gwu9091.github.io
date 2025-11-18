@@ -23,6 +23,12 @@
 
   a {
     text-decoration: none;
+    text-align: center;
+  }
+
+  span {
+    text-decoration: none;
+    text-align: center;
   }
 
   /* 目前頁面 (active 狀態) 的顏色 */
@@ -40,7 +46,23 @@
   .navbar-brand:hover {
     color: #ffeb3b !important;
   }
-  .app{
-      border: 1px #ffeb3b  solid;
-      padding: 10px;
+
+  .app {
+    border: 1px #ffeb3b solid;
+    padding: 10px;
+  }
+
+  @media (max-width: 400px) {
+    .app {
+      font-size: 1rem;
+    }
+
+    .navbar-brand {
+      font-size: 1rem;
+      margin: 0;
+    }
+
+    .navbar-toggler {
+      font-size: 1rem;
+    }
   }
