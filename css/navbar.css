@@ -24,7 +24,11 @@
   a {
     text-decoration: none;
     text-align: center;
+    border: 1px solid transparent;
   }
+  a:active,a:focus{
+    border:1px dotted black;
+  } 
 
   span {
     text-decoration: none;
