@@ -24,15 +24,18 @@
   a {
     text-decoration: none;
     text-align: center;
-    border: 1px solid transparent;
   }
   a:active,a:focus{
-    border:1px dotted black;
+    outline: 1px dotted black;
   } 
 
   span {
     text-decoration: none;
     text-align: center;
+  }
+  li{
+    display: flex;
+    justify-content: center;
   }
 
   /* 目前頁面 (active 狀態) 的顏色 */
