@@ -25,49 +25,49 @@ document.addEventListener("DOMContentLoaded", async function () {
       authLinksContainer.innerHTML = "";
 
       if (session) {
-  // ------------------------
-  // 已登入：建立會員中心 / 登出
-  // ------------------------
-  const li = document.createElement("li");
-  li.classList.add("nav-item", "d-flex", "align-items-center");
+        // ------------------------
+        // 已登入：建立會員中心 / 登出
+        // ------------------------
+        const li = document.createElement("li");
+        li.classList.add("nav-item", "d-flex", "align-items-center");
 
-  // 會員中心
-  const memberLink = document.createElement("a");
-  memberLink.href = "member.html";
-  memberLink.textContent = "會員中心";
-  memberLink.classList.add("nav-link");
+        // 會員中心
+        const memberLink = document.createElement("a");
+        memberLink.href = "member.html";
+        memberLink.textContent = "會員中心";
+        memberLink.classList.add("nav-link", "w-100-sm", "alignright");
 
-  // 分隔符
-  const divider = document.createElement("span");
-  divider.textContent = "/";
-  divider.classList.add("text-white", "mx-1");
+        // 分隔符
+        const divider = document.createElement("span");
+        divider.textContent = "/";
+        divider.classList.add("text-white", "mx-1");
 
-  // 登出
-  const logoutLink = document.createElement("a");
-  logoutLink.href = "#";
-  logoutLink.textContent = "登出";
-  logoutLink.classList.add("nav-link");
+        // 登出
+        const logoutLink = document.createElement("a");
+        logoutLink.href = "#";
+        logoutLink.textContent = "登出";
+        logoutLink.classList.add("nav-link", "w-100-sm", "alignleft");
 
-  // 登出事件
-  logoutLink.addEventListener("click", async (e) => {
-    e.preventDefault();
-    await window.supabaseClient.auth.signOut();
+        // 登出事件
+        logoutLink.addEventListener("click", async (e) => {
+          e.preventDefault();
+          await window.supabaseClient.auth.signOut();
 
-    if (typeof window.showAlert === "function") {
-      window.showAlert("您已登出！", "success");
-    } else {
-      alert("您已登出！");
-    }
+          if (typeof window.showAlert === "function") {
+            window.showAlert("您已登出！", "success");
+          } else {
+            alert("您已登出！");
+          }
 
-    setTimeout(() => location.reload(), 1500);
-  });
+          setTimeout(() => location.reload(), 1500);
+        });
 
-  li.appendChild(memberLink);
-  li.appendChild(divider);
-  li.appendChild(logoutLink);
+        li.appendChild(memberLink);
+        li.appendChild(divider);
+        li.appendChild(logoutLink);
 
-  authLinksContainer.appendChild(li);
-} else {
+        authLinksContainer.appendChild(li);
+      } else {
         // ------------------------
         // 未登入
         // ------------------------
@@ -76,6 +76,10 @@ document.addEventListener("DOMContentLoaded", async function () {
         loginLink.textContent = "登入";
         loginLink.classList.add("nav-link");
         authLinksContainer.appendChild(loginLink);
+        const liParent = authLinksContainer.closest("li");
+        if (liParent) {
+          liParent.classList.remove("ms-3");
+        }
       }
     }
 

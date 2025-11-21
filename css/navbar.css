@@ -25,15 +25,36 @@
     text-decoration: none;
     text-align: center;
   }
-  a:active,a:focus{
+
+  .alignleft {
+    text-align: left;
+  }
+
+  .alignright {
+    text-align: right
+  }
+
+  .w-100 {
+    width: 100%;
+  }
+
+  @media (max-width: 976px) {
+    .w-100-sm {
+      width: 100%;
+    }
+  }
+
+  a:active,
+  a:focus {
     outline: 1px dotted black;
-  } 
+  }
 
   span {
     text-decoration: none;
     text-align: center;
   }
-  li{
+
+  li {
     display: flex;
     justify-content: center;
   }
