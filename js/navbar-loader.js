@@ -12,8 +12,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     // ------------------------
     const { createClient } = supabase;
     window.supabaseClient = createClient(
-      "https://cbmimzpytdmtjvanvaoh.supabase.co",
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNibWltenB5dGRtdGp2YW52YW9oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg0MjE2MzUsImV4cCI6MjA2Mzk5NzYzNX0.YHon747wNSjx6-ZcG-344tlKXtKqXxl-VYu1Vtbusgo"
+      "https://lslsapzffervvvnqwxcb.supabase.co",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxzbHNhcHpmZmVydnZ2bnF3eGNiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE0MzAyOTQsImV4cCI6MjA5NzAwNjI5NH0.L-aDGm1eTwDZMsxMGZ90v3IjXIl9mCC7y-fnut_Qyqk"
     );
 
     // 取得登入狀態
