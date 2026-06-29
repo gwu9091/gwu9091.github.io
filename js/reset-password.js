@@ -7,8 +7,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
   const supabaseClient = supabase.createClient(
-    "https://lslsapzffervvvnqwxcb.supabase.co",
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxzbHNhcHpmZmVydnZ2bnF3eGNiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE0MzAyOTQsImV4cCI6MjA5NzAwNjI5NH0.L-aDGm1eTwDZMsxMGZ90v3IjXIl9mCC7y-fnut_Qyqk"
+    "https://cbmimzpytdmtjvanvaoh.supabase.co",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNibWltenB5dGRtdGp2YW52YW9oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg0MjE2MzUsImV4cCI6MjA2Mzk5NzYzNX0.YHon747wNSjx6-ZcG-344tlKXtKqXxl-VYu1Vtbusgo"
   );
 
   // 取得 DOM 元素
